@@ -1,0 +1,26 @@
+# Build output
+dist/
+*.local
+
+# Node modules
+node_modules/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+npm-debug.log
+npm-error.log
+pnpm-debug.log
+pnpm-error.log
+yarn-error.log
