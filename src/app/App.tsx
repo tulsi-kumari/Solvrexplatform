@@ -1,4 +1,4 @@
-import { HashRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Navbar } from "./components/Navbar";
 import { Hero } from "./components/Hero";
 import { About } from "./components/About";
@@ -29,12 +29,12 @@ function HomePage() {
 
 export default function App() {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/terms-of-service" element={<TermsOfService />} />
       </Routes>
-    </HashRouter>
+    </BrowserRouter>
   );
 }
