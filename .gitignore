@@ -1,14 +1,37 @@
-# Build output
-dist/
-*.local
-
-# Node modules
+# dependencies
+/node_modules
 node_modules/
 
-# Environment files
+# next.js
+/.next/
+/out/
+
+# production / build
+/build
+dist/
+
+# misc
+.DS_Store
+*.pem
+*.local
+
+# debug logs
+npm-debug.log*
+npm-error.log
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+pnpm-error.log
+
+# local env files
 .env
-.env.local
-.env.*.local
+.env*.local
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
 
 # IDE
 .vscode/
@@ -16,11 +39,6 @@ node_modules/
 *.swp
 *.swo
 *~
-.DS_Store
 
-# Logs
-npm-debug.log
-npm-error.log
-pnpm-debug.log
-pnpm-error.log
-yarn-error.log
+# figma export (inspection only)
+_figma_design.zip

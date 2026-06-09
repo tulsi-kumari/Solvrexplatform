@@ -1,0 +1,103 @@
+@import "tailwindcss";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  background-color: #0d0e14;
+  color: #f5f5f7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+::selection {
+  background-color: rgba(77, 124, 255, 0.25);
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #0d0e14;
+}
+::-webkit-scrollbar-thumb {
+  background: #2a2f4a;
+  border-radius: 2px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: inherit;
+  font-size: inherit;
+}
+
+input,
+textarea,
+select,
+button {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.sx-container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+@media (max-width: 768px) {
+  .sx-container {
+    padding: 0 24px;
+  }
+  .sx-grid-3 {
+    grid-template-columns: 1fr !important;
+  }
+  .sx-grid-2 {
+    grid-template-columns: 1fr !important;
+  }
+  .sx-footer-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 40px !important;
+  }
+  .sx-hero-heading {
+    font-size: 40px !important;
+  }
+  .sx-services-tiles {
+    gap: 0 !important;
+  }
+  .sx-row {
+    flex-direction: column !important;
+    gap: 24px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .sx-footer-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
