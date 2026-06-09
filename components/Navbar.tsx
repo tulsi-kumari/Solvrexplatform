@@ -105,7 +105,7 @@ export function Navbar() {
               transition: 'color 0.15s, background 0.15s',
             }}
             onMouseEnter={() => setServicesOpen(true)}
-            onClick={() => setServicesOpen(false)}
+            onClick={() => setServicesOpen((o) => !o)}
           >
             Services
             <svg

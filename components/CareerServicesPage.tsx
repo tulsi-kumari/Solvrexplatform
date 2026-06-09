@@ -18,7 +18,7 @@ const labelStyle: CSSProperties = {
   fontSize: '10.5px',
   letterSpacing: '0.1em',
   textTransform: 'uppercase',
-  color: '#4a4e68',
+  color: '#8a8da5',
   fontWeight: 600,
   flexShrink: 0,
   width: '180px',
