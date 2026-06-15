@@ -17,9 +17,8 @@ const styles = `
     display: flex; flex-direction: column;
     text-align: left; width: 100%;
     cursor: pointer;
-    transition: background-color 0.15s ease;
   }
-  .cx-card:hover { background: ${C.bgSurface}; }
+  .cx-card:hover .cx-detail-btn { text-decoration: underline; }
   .cx-card:focus-visible, .cx-pill:focus-visible, .cx-btn:focus-visible, .cx-modal-close:focus-visible, .cx-detail-btn:focus-visible {
     outline: 2px solid ${C.blueLight}; outline-offset: 2px;
   }
