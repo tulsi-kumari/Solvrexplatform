@@ -3,6 +3,7 @@ import { C, eyebrow, pageH1, metaLabel } from "@/lib/theme";
 import { BulletList } from "@/components/ui/BulletList";
 import { ContactCallout } from "@/components/ui/ContactCallout";
 import type { Service } from "@/data/services";
+import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 
 const labelStyle: CSSProperties = {
   ...metaLabel,
@@ -26,6 +27,7 @@ export function ServiceDetailPage({ service }: { service: Service }) {
       {/* Page header */}
       <section style={{ padding: "80px 0 64px", borderBottom: `1px solid ${C.border}` }}>
         <div className="sx-container">
+          <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Services", href: "/services" }, { label: service.title }]} />
           <p style={eyebrow}>{service.title}</p>
           <h1 style={{ ...pageH1, maxWidth: "560px" }}>{service.h1}</h1>
         </div>

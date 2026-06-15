@@ -41,6 +41,14 @@ a {
   text-decoration: none;
 }
 
+.sx-crumb-link {
+  color: #a0a3b8;
+  transition: color 0.15s;
+}
+.sx-crumb-link:hover {
+  color: #f5f5f7;
+}
+
 h1,
 h2,
 h3,

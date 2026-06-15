@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ROLES, TRACKS, type Track } from "@/data/roles";
 import { C, eyebrow, sectionHeading } from "@/lib/theme";
 import { siteConfig } from "@/lib/site";
+import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 
 /* ── Page-scoped CSS (responsive, hover, a11y) ───────────────── */
 const styles = `
@@ -60,6 +61,7 @@ export function CareersPage() {
         />
         <div style={{ position: "absolute", left: 0, top: 0, width: "3px", height: "100%", background: `linear-gradient(to bottom, ${C.blue} 0%, transparent 100%)` }} aria-hidden="true" />
         <div className="sx-container" style={{ position: "relative" }}>
+          <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Careers" }]} />
           <p style={eyebrow}>Careers at Solvrex</p>
           <h1 style={{ fontSize: "clamp(38px, 5.5vw, 64px)", fontWeight: 300, color: C.text, lineHeight: 1.1, letterSpacing: "-0.03em", marginBottom: "26px", maxWidth: "760px" }}>
             Build something from the ground up — as part of our founding team.

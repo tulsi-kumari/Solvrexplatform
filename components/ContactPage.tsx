@@ -3,6 +3,7 @@
 import { useState, CSSProperties } from 'react';
 import { C } from '@/lib/theme';
 import { siteConfig } from '@/lib/site';
+import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 
 const inputStyle: CSSProperties = {
   width: '100%',
@@ -85,6 +86,7 @@ export function ContactPage() {
       {/* Page header */}
       <section style={{ padding: '80px 0 64px', borderBottom: `1px solid ${C.border}` }}>
         <div className="sx-container">
+          <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Contact' }]} />
           <p style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: C.blue, marginBottom: '22px' }}>
             Contact
           </p>

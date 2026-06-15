@@ -2,6 +2,7 @@ import { CSSProperties } from 'react';
 import Link from 'next/link';
 import { C, eyebrow, pageH1, metaLabel } from '@/lib/theme';
 import { siteConfig } from '@/lib/site';
+import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 
 const labelStyle: CSSProperties = {
   ...metaLabel,
@@ -37,6 +38,7 @@ export function AboutPage() {
       {/* Page header */}
       <section style={{ padding: '80px 0 64px', borderBottom: `1px solid ${C.border}` }}>
         <div className="sx-container">
+          <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'About' }]} />
           <p style={eyebrow}>About</p>
           <h1 style={{ ...pageH1, maxWidth: '560px' }}>Technology and business support.</h1>
         </div>

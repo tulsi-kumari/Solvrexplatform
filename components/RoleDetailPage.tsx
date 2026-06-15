@@ -1,7 +1,7 @@
-import Link from "next/link";
 import { C } from "@/lib/theme";
 import { PrimaryLink, ArrowRight } from "@/components/ui/PrimaryLink";
 import { DetailList } from "@/components/ui/DetailList";
+import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { siteConfig } from "@/lib/site";
 import type { Role } from "@/data/roles";
 
@@ -22,15 +22,7 @@ export function RoleDetailPage({ role }: { role: Role }) {
       {/* Header band */}
       <section style={{ backgroundColor: C.bgSurface, borderBottom: `1px solid ${C.border}` }}>
         <div className="sx-container" style={{ padding: "32px 0 40px" }}>
-          <Link
-            href="/careers"
-            style={{ display: "inline-flex", alignItems: "center", gap: "6px", fontSize: "13px", color: C.blueLight, fontWeight: 500, marginBottom: "28px" }}
-          >
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-              <path d="M10 6H2M5 3L2 6l3 3" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            Back to all roles
-          </Link>
+          <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Careers", href: "/careers" }, { label: role.title }]} />
 
           <p style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", color: C.blue, marginBottom: "16px" }}>
             {role.track}

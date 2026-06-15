@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { C, eyebrow, pageH1 } from '@/lib/theme';
 import { SERVICES } from '@/data/services';
 import { ContactCallout } from '@/components/ui/ContactCallout';
+import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 
 export function ServicesPage() {
   return (
@@ -12,6 +13,7 @@ export function ServicesPage() {
       {/* Page header */}
       <section style={{ padding: '80px 0 64px', borderBottom: `1px solid ${C.border}` }}>
         <div className="sx-container">
+          <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Services' }]} />
           <p style={eyebrow}>Services</p>
           <h1 style={{ ...pageH1, maxWidth: '520px' }}>What we do.</h1>
         </div>
