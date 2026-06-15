@@ -1,25 +1,15 @@
 "use client";
 
 import { useState, CSSProperties } from 'react';
-
-const C = {
-  bg: '#0d0e14',
-  bgSurface: '#13151e',
-  border: '#1e2235',
-  borderInput: '#2a2f4a',
-  text: '#f5f5f7',
-  textMuted: '#a0a3b8',
-  textSubtle: '#6b6e85',
-  blue: '#4d7cff',
-  blueLight: '#7a9dff',
-};
+import { C } from '@/lib/theme';
+import { siteConfig } from '@/lib/site';
 
 const inputStyle: CSSProperties = {
   width: '100%',
   display: 'block',
   padding: '11px 14px',
   backgroundColor: C.bgSurface,
-  border: `1px solid ${C.borderInput}`,
+  border: `1px solid ${C.borderStrong}`,
   color: C.text,
   fontSize: '14px',
   outline: 'none',
@@ -41,9 +31,9 @@ const fieldLabelStyle: CSSProperties = {
 
 const contactStyles = `
   .sx-input { appearance: none; }
-  .sx-input::placeholder { color: #6b6e85; }
-  .sx-input:focus { border-color: #4d7cff !important; }
-  .sx-submit:hover { background-color: #3b6aff !important; }
+  .sx-input::placeholder { color: ${C.textSubtle}; }
+  .sx-input:focus { border-color: ${C.blue} !important; }
+  .sx-submit:hover { background-color: ${C.blueHover} !important; }
   .sx-submit:disabled { opacity: 0.6; cursor: default; }
 `;
 
@@ -131,12 +121,12 @@ export function ContactPage() {
                   Email
                 </p>
                 <a
-                  href="mailto:solvrex.official@gmail.com"
+                  href={`mailto:${siteConfig.contactEmail}`}
                   style={{ fontSize: '15px', color: C.blueLight, fontWeight: 400, transition: 'color 0.15s' }}
                   onMouseEnter={(e) => { e.currentTarget.style.color = C.text; }}
                   onMouseLeave={(e) => { e.currentTarget.style.color = C.blueLight; }}
                 >
-                  solvrex.official@gmail.com
+                  {siteConfig.contactEmail}
                 </a>
               </div>
 

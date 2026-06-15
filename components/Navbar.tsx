@@ -3,56 +3,17 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { C } from '@/lib/theme';
+import { SERVICES } from '@/data/services';
+import { siteConfig } from '@/lib/site';
 
-const C = {
-  bg: '#0d0e14',
-  bgPanel: '#13151e',
-  border: '#1e2235',
-  text: '#f5f5f7',
-  textMuted: '#a0a3b8',
-  textSubtle: '#6b6e85',
-  blue: '#4d7cff',
-  blueLight: '#7a9dff',
-};
-
-const megaMenuData = [
-  {
-    category: 'Business Enablement',
-    to: '/services/business-enablement',
-    description: 'Website development and operational support',
-    links: [
-      'Website Development',
-      'Google Business Profile Setup',
-      'Business Process Improvement',
-      'Operational Support',
-      'Digital Enablement',
-    ],
-  },
-  {
-    category: 'Technology Consulting',
-    to: '/services/technology-consulting',
-    description: 'Independent technology guidance',
-    links: [
-      'Technology Assessment',
-      'Platform Evaluation',
-      'Architecture Guidance',
-      'Implementation Planning',
-      'Automation Opportunities',
-    ],
-  },
-  {
-    category: 'Career Services',
-    to: '/services/career-services',
-    description: 'Support for career transitions',
-    links: [
-      'Resume Review',
-      'LinkedIn Review',
-      'Job Search Strategy',
-      'Application Support',
-      'Career Guidance',
-    ],
-  },
-];
+// Mega-menu data derived from the single services source of truth.
+const megaMenuData = SERVICES.map((s) => ({
+  category: s.title,
+  to: `/services/${s.slug}`,
+  description: s.navDescription,
+  links: s.megaLinks,
+}));
 
 export function Navbar() {
   const pathname = usePathname();
@@ -83,7 +44,7 @@ export function Navbar() {
           style={{ fontSize: '15px', fontWeight: 600, color: C.text, letterSpacing: '-0.01em' }}
           onClick={() => { setServicesOpen(false); setMobileOpen(false); }}
         >
-          Solvrex
+          {siteConfig.name}
         </Link>
 
         {/* Desktop nav */}
@@ -164,7 +125,7 @@ export function Navbar() {
             top: '64px',
             left: 0,
             right: 0,
-            backgroundColor: C.bgPanel,
+            backgroundColor: C.bgSurface,
             borderTop: `2px solid ${C.blue}`,
             borderBottom: `1px solid ${C.border}`,
             boxShadow: '0 20px 60px rgba(0,0,0,0.7)',
@@ -229,7 +190,7 @@ export function Navbar() {
       {mobileOpen && (
         <div
           className="md:hidden"
-          style={{ backgroundColor: C.bgPanel, borderTop: `1px solid ${C.border}` }}
+          style={{ backgroundColor: C.bgSurface, borderTop: `1px solid ${C.border}` }}
         >
           <div style={{ padding: '8px 0 24px' }}>
             {[

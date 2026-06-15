@@ -1,42 +1,10 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState, CSSProperties } from "react";
-import { ROLES, TRACKS, APPLY_FORM_URL, type Role, type Track } from "@/data/roles";
-
-// TODO: replace with the real Solvrex LinkedIn company URL.
-const LINKEDIN_URL = "https://www.linkedin.com/company/solvrex";
-
-/* ── Design tokens ───────────────────────────────────────────── */
-const C = {
-  bg: "#0d0e14",
-  bgSurface: "#13151e",
-  bgRaised: "#171a26",
-  border: "#1e2235",
-  borderStrong: "#2a2f4a",
-  text: "#f5f5f7",
-  textBody: "#c4c7d6",
-  textMuted: "#a0a3b8",
-  textSubtle: "#8a8da5",
-  blue: "#4d7cff",
-  blueLight: "#7a9dff",
-};
-
-const eyebrow: CSSProperties = {
-  fontSize: "11px",
-  fontWeight: 600,
-  letterSpacing: "0.12em",
-  textTransform: "uppercase",
-  color: C.blue,
-  marginBottom: "22px",
-};
-
-const sectionHeading: CSSProperties = {
-  fontSize: "clamp(26px, 3.4vw, 38px)",
-  fontWeight: 300,
-  color: C.text,
-  letterSpacing: "-0.025em",
-  lineHeight: 1.15,
-};
+import { useEffect, useMemo, useRef, useState } from "react";
+import { ROLES, TRACKS, type Role, type Track } from "@/data/roles";
+import { C, eyebrow, sectionHeading } from "@/lib/theme";
+import { siteConfig } from "@/lib/site";
+import { BulletList } from "@/components/ui/BulletList";
 
 /* ── Page-scoped CSS (responsive, hover, motion, a11y) ───────── */
 const styles = `
@@ -131,14 +99,7 @@ function DetailList({ heading, items }: { heading: string; items: string[] }) {
       <h3 style={{ fontSize: "12px", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: C.textSubtle, marginBottom: "14px" }}>
         {heading}
       </h3>
-      <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "10px" }}>
-        {items.map((item) => (
-          <li key={item} style={{ display: "flex", alignItems: "flex-start", gap: "12px", fontSize: "14.5px", color: C.textBody, lineHeight: 1.6 }}>
-            <span style={{ color: C.blue, flexShrink: 0, marginTop: "2px", fontSize: "12px" }}>—</span>
-            {item}
-          </li>
-        ))}
-      </ul>
+      <BulletList items={items} />
     </div>
   );
 }
@@ -185,8 +146,6 @@ function RoleModal({ role, onClose }: { role: Role; onClose: () => void }) {
       prevFocused?.focus?.();
     };
   }, [role.id, onClose]);
-
-  const applyHref = `${APPLY_FORM_URL}`;
 
   return (
     <div
@@ -250,7 +209,7 @@ function RoleModal({ role, onClose }: { role: Role; onClose: () => void }) {
           <div style={{ marginTop: "32px", display: "flex", flexWrap: "wrap", gap: "12px", alignItems: "center" }}>
             <a
               className="cx-btn"
-              href={applyHref}
+              href={siteConfig.applyFormUrl}
               target="_blank"
               rel="noopener noreferrer"
               style={{
@@ -259,7 +218,7 @@ function RoleModal({ role, onClose }: { role: Role; onClose: () => void }) {
                 borderRadius: "3px", fontSize: "14px", fontWeight: 500,
                 transition: "background-color 0.15s",
               }}
-              onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "#3b6aff"; }}
+              onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = C.blueHover; }}
               onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = C.blue; }}
             >
               Apply now
@@ -285,8 +244,8 @@ const VALUES = [
 
 const STEPS = [
   { n: "01", title: "Foundation phase", when: "Months 1–3", body: "Hands-on work on real client projects with close mentorship as you find your feet." },
-  { n: "02", title: "Paid internship", when: "Next 6 months", body: "A monthly stipend of ₹6,000–₹12,000, based on your performance during the foundation phase." },
-  { n: "03", title: "Pre-Placement Offer", when: "For exceptional performers", body: "A full-time role with an annual CTC of ₹3–8 LPA for those who stand out." },
+  { n: "02", title: "Paid internship", when: "Next 6 months", body: `A monthly stipend of ${siteConfig.internship.stipend}, based on your performance during the foundation phase.` },
+  { n: "03", title: "Pre-Placement Offer", when: "For exceptional performers", body: `A full-time role with an annual CTC of ${siteConfig.internship.ctc} for those who stand out.` },
 ];
 
 /* ── Page ────────────────────────────────────────────────────── */
@@ -333,7 +292,7 @@ export function CareersPage() {
               borderRadius: "3px", fontSize: "14px", fontWeight: 500, border: `1px solid ${C.blue}`,
               transition: "background-color 0.15s, border-color 0.15s",
             }}
-            onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "#3b6aff"; e.currentTarget.style.borderColor = "#3b6aff"; }}
+            onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = C.blueHover; e.currentTarget.style.borderColor = C.blueHover; }}
             onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = C.blue; e.currentTarget.style.borderColor = C.blue; }}
           >
             View open roles
@@ -447,7 +406,7 @@ export function CareersPage() {
             </p>
             <a
               className="cx-btn"
-              href={LINKEDIN_URL}
+              href={siteConfig.linkedInUrl}
               target="_blank"
               rel="noopener noreferrer"
               style={{

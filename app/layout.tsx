@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { siteConfig } from "@/lib/site";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -10,27 +11,24 @@ const inter = Inter({
   display: "swap",
 });
 
-const title =
-  "Solvrex | Technology Consulting, Career Support & Business Solutions";
-const description =
-  "Solvrex helps professionals and businesses achieve measurable outcomes through technology consulting, career support, operational guidance, and practical business solutions.";
+const fullTitle = `${siteConfig.name} | Technology Consulting, Career Support & Business Solutions`;
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://solvrex.in"),
-  title,
-  description,
+  metadataBase: new URL(siteConfig.url),
+  title: { default: fullTitle, template: `%s | ${siteConfig.name}` },
+  description: siteConfig.description,
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
-    url: "https://solvrex.in/",
-    title,
-    description,
+    url: `${siteConfig.url}/`,
+    title: fullTitle,
+    description: siteConfig.description,
     images: ["/og-image.png"],
   },
   twitter: {
     card: "summary_large_image",
-    title,
-    description,
+    title: fullTitle,
+    description: siteConfig.description,
     images: ["/og-image.png"],
   },
   icons: {

@@ -1,7 +1,7 @@
 import { CareersPage } from "@/components/CareersPage";
 
 export const metadata = {
-  title: "Careers | Solvrex",
+  title: "Careers",
   description:
     "Join Solvrex's founding intern team. Open internship roles across Tech, Sales & Business Development, Marketing, and Career Services.",
 };

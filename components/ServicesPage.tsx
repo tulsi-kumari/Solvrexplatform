@@ -1,43 +1,9 @@
 "use client";
 
 import Link from 'next/link';
-
-const C = {
-  bg: '#0d0e14',
-  border: '#1e2235',
-  text: '#f5f5f7',
-  textMuted: '#a0a3b8',
-  textSubtle: '#6b6e85',
-  blue: '#4d7cff',
-  blueLight: '#7a9dff',
-};
-
-const services = [
-  {
-    id: 'business-enablement',
-    to: '/services/business-enablement',
-    number: '01',
-    title: 'Business Enablement',
-    description:
-      'Website development, online presence, and operational support for small businesses.',
-  },
-  {
-    id: 'technology-consulting',
-    to: '/services/technology-consulting',
-    number: '02',
-    title: 'Technology Consulting',
-    description:
-      'Platform evaluation, architecture guidance, and implementation planning.',
-  },
-  {
-    id: 'career-services',
-    to: '/services/career-services',
-    number: '03',
-    title: 'Career Services',
-    description:
-      'Resume review, LinkedIn optimization, and job search strategy.',
-  },
-];
+import { C, eyebrow, pageH1 } from '@/lib/theme';
+import { SERVICES } from '@/data/services';
+import { ContactCallout } from '@/components/ui/ContactCallout';
 
 export function ServicesPage() {
   return (
@@ -46,21 +12,8 @@ export function ServicesPage() {
       {/* Page header */}
       <section style={{ padding: '80px 0 64px', borderBottom: `1px solid ${C.border}` }}>
         <div className="sx-container">
-          <p style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: C.blue, marginBottom: '22px' }}>
-            Services
-          </p>
-          <h1
-            style={{
-              fontSize: 'clamp(32px, 4vw, 48px)',
-              fontWeight: 300,
-              color: C.text,
-              letterSpacing: '-0.025em',
-              lineHeight: 1.12,
-              maxWidth: '520px',
-            }}
-          >
-            What we do.
-          </h1>
+          <p style={eyebrow}>Services</p>
+          <h1 style={{ ...pageH1, maxWidth: '520px' }}>What we do.</h1>
         </div>
       </section>
 
@@ -76,10 +29,10 @@ export function ServicesPage() {
               backgroundColor: C.border,
             }}
           >
-            {services.map((service) => (
+            {SERVICES.map((service) => (
               <Link
-                key={service.id}
-                href={service.to}
+                key={service.slug}
+                href={`/services/${service.slug}`}
                 style={{
                   backgroundColor: C.bg,
                   padding: '36px 32px 40px',
@@ -88,8 +41,8 @@ export function ServicesPage() {
                   transition: 'background-color 0.15s',
                   textDecoration: 'none',
                 }}
-                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.backgroundColor = '#13151e'; }}
-                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.backgroundColor = C.bg; }}
+                onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = C.bgSurface; }}
+                onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = C.bg; }}
               >
                 <span
                   style={{
@@ -124,7 +77,7 @@ export function ServicesPage() {
                     flex: 1,
                   }}
                 >
-                  {service.description}
+                  {service.cardDescription}
                 </p>
               </Link>
             ))}
@@ -133,39 +86,7 @@ export function ServicesPage() {
       </section>
 
       {/* Contact callout */}
-      <section style={{ padding: '72px 0', borderTop: `1px solid ${C.border}` }}>
-        <div className="sx-container">
-          <div
-            className="sx-row"
-            style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '40px' }}
-          >
-            <p style={{ fontSize: '17px', color: C.textMuted, lineHeight: 1.65, maxWidth: '500px' }}>
-              To discuss your situation, reach out directly.
-            </p>
-            <Link
-              href="/contact"
-              style={{
-                flexShrink: 0,
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                padding: '11px 22px',
-                backgroundColor: C.blue,
-                color: '#ffffff',
-                fontSize: '14px',
-                fontWeight: 500,
-                borderRadius: '2px',
-                border: `1px solid ${C.blue}`,
-                transition: 'background-color 0.15s',
-              }}
-              onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#3b6aff'; }}
-              onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = C.blue; }}
-            >
-              Contact us →
-            </Link>
-          </div>
-        </div>
-      </section>
+      <ContactCallout borderTop />
     </div>
   );
 }

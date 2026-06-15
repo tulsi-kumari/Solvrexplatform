@@ -1,19 +1,53 @@
 "use client";
 
 import Link from 'next/link';
+import { C } from '@/lib/theme';
+import { siteConfig } from '@/lib/site';
+import { SERVICES } from '@/data/services';
 
-const C = {
-  bg: '#0a0b11',
-  border: '#1e2235',
-  text: '#f5f5f7',
-  textMuted: '#a0a3b8',
-  textSubtle: '#6b6e85',
-  blue: '#4d7cff',
+const displayDomain = siteConfig.url.replace(/^https?:\/\//, '');
+
+const columnLabel = {
+  fontSize: '10.5px',
+  fontWeight: 600,
+  letterSpacing: '0.1em',
+  textTransform: 'uppercase' as const,
+  color: C.textSubtle,
+  marginBottom: '18px',
 };
 
-export function Footer() {
+const linkStyle = {
+  display: 'block',
+  fontSize: '13px',
+  color: C.textMuted,
+  marginBottom: '11px',
+  transition: 'color 0.15s',
+};
+
+function FooterLink({ href, children }: { href: string; children: React.ReactNode }) {
   return (
-    <footer style={{ backgroundColor: C.bg, borderTop: `1px solid ${C.border}` }}>
+    <Link
+      href={href}
+      style={linkStyle}
+      onMouseEnter={(e) => { e.currentTarget.style.color = C.text; }}
+      onMouseLeave={(e) => { e.currentTarget.style.color = C.textMuted; }}
+    >
+      {children}
+    </Link>
+  );
+}
+
+export function Footer() {
+  const services = SERVICES.map((s) => [s.title, `/services/${s.slug}`] as const);
+  const company = [
+    ['About', '/about'],
+    ['Services', '/services'],
+    ['Careers', '/careers'],
+    ['Contact', '/contact'],
+  ] as const;
+
+  return (
+    <footer style={{ backgroundColor: C.bgFooter, borderTop: `1px solid ${C.border}` }}>
       <div className="sx-container">
         {/* Main grid */}
         <div
@@ -29,72 +63,42 @@ export function Footer() {
           {/* Brand */}
           <div>
             <p style={{ fontSize: '15px', fontWeight: 600, color: C.text, marginBottom: '14px', letterSpacing: '-0.01em' }}>
-              Solvrex
+              {siteConfig.name}
             </p>
             <p style={{ fontSize: '13px', color: C.textMuted, lineHeight: 1.75, maxWidth: '220px' }}>
               Practical technology and business solutions for organizations built to last.
             </p>
             <p style={{ marginTop: '24px', fontSize: '12px', color: C.textSubtle }}>
-              solvrex.official@gmail.com
+              {siteConfig.contactEmail}
             </p>
           </div>
 
           {/* Services */}
           <div>
-            <p style={{ fontSize: '10.5px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: C.textSubtle, marginBottom: '18px' }}>
-              Services
-            </p>
-            {[
-              ['Business Enablement', '/services/business-enablement'],
-              ['Technology Consulting', '/services/technology-consulting'],
-              ['Career Services', '/services/career-services'],
-            ].map(([label, to]) => (
-              <Link
-                key={label}
-                href={to}
-                style={{ display: 'block', fontSize: '13px', color: C.textMuted, marginBottom: '11px', transition: 'color 0.15s' }}
-                onMouseEnter={(e) => { e.currentTarget.style.color = C.text; }}
-                onMouseLeave={(e) => { e.currentTarget.style.color = C.textMuted; }}
-              >
-                {label}
-              </Link>
+            <p style={columnLabel}>Services</p>
+            {services.map(([label, href]) => (
+              <FooterLink key={label} href={href}>{label}</FooterLink>
             ))}
           </div>
 
           {/* Company */}
           <div>
-            <p style={{ fontSize: '10.5px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: C.textSubtle, marginBottom: '18px' }}>
-              Company
-            </p>
-            {[
-              ['About', '/about'],
-              ['Services', '/services'],
-              ['Contact', '/contact'],
-            ].map(([label, to]) => (
-              <Link
-                key={label}
-                href={to}
-                style={{ display: 'block', fontSize: '13px', color: C.textMuted, marginBottom: '11px', transition: 'color 0.15s' }}
-                onMouseEnter={(e) => { e.currentTarget.style.color = C.text; }}
-                onMouseLeave={(e) => { e.currentTarget.style.color = C.textMuted; }}
-              >
-                {label}
-              </Link>
+            <p style={columnLabel}>Company</p>
+            {company.map(([label, href]) => (
+              <FooterLink key={label} href={href}>{label}</FooterLink>
             ))}
           </div>
 
           {/* Contact */}
           <div>
-            <p style={{ fontSize: '10.5px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: C.textSubtle, marginBottom: '18px' }}>
-              Get in touch
-            </p>
+            <p style={columnLabel}>Get in touch</p>
             <a
-              href="mailto:solvrex.official@gmail.com"
-              style={{ display: 'block', fontSize: '13px', color: C.textMuted, marginBottom: '11px', transition: 'color 0.15s' }}
+              href={`mailto:${siteConfig.contactEmail}`}
+              style={linkStyle}
               onMouseEnter={(e) => { e.currentTarget.style.color = C.text; }}
               onMouseLeave={(e) => { e.currentTarget.style.color = C.textMuted; }}
             >
-              solvrex.official@gmail.com
+              {siteConfig.contactEmail}
             </a>
             <Link
               href="/contact"
@@ -108,10 +112,10 @@ export function Footer() {
         {/* Bottom bar */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '52px' }}>
           <p style={{ fontSize: '12px', color: C.textSubtle }}>
-            © 2026 Solvrex. All rights reserved.
+            © {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
           </p>
           <p style={{ fontSize: '12px', color: C.textSubtle }}>
-            solvrex.in
+            {displayDomain}
           </p>
         </div>
       </div>

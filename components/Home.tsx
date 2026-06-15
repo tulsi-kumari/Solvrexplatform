@@ -1,14 +1,9 @@
 "use client";
 
 import Link from 'next/link';
-
-const C = {
-  bg: '#0d0e14',
-  border: '#1e2235',
-  text: '#f5f5f7',
-  textMuted: '#a0a3b8',
-  blue: '#4d7cff',
-};
+import { C, eyebrow } from '@/lib/theme';
+import { siteConfig } from '@/lib/site';
+import { PrimaryLink, ArrowRight } from '@/components/ui/PrimaryLink';
 
 export function Home() {
   return (
@@ -46,16 +41,7 @@ export function Home() {
 
         <div className="sx-container" style={{ position: 'relative' }}>
           {/* Eyebrow */}
-          <p
-            style={{
-              fontSize: '11px',
-              fontWeight: 600,
-              letterSpacing: '0.12em',
-              textTransform: 'uppercase',
-              color: C.blue,
-              marginBottom: '28px',
-            }}
-          >
+          <p style={{ ...eyebrow, marginBottom: '28px' }}>
             Technology &amp; Business Solutions
           </p>
 
@@ -91,37 +77,17 @@ export function Home() {
 
           {/* CTAs */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '24px', flexWrap: 'wrap' }}>
-            <Link
-              href="/services"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                padding: '12px 24px',
-                backgroundColor: C.blue,
-                color: '#ffffff',
-                fontSize: '14px',
-                fontWeight: 500,
-                letterSpacing: '0.01em',
-                borderRadius: '2px',
-                border: `1px solid ${C.blue}`,
-                transition: 'background-color 0.15s, border-color 0.15s',
-              }}
-              onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#3b6aff'; e.currentTarget.style.borderColor = '#3b6aff'; }}
-              onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = C.blue; e.currentTarget.style.borderColor = C.blue; }}
-            >
+            <PrimaryLink href="/services">
               Explore services
-              <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
-                <path d="M2 6.5h9M8 3.5l3 3-3 3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </Link>
+              <ArrowRight />
+            </PrimaryLink>
             <Link
               href="/about"
               style={{ fontSize: '14px', color: C.textMuted, display: 'inline-flex', alignItems: 'center', gap: '5px', transition: 'color 0.15s' }}
               onMouseEnter={(e) => { e.currentTarget.style.color = C.text; }}
               onMouseLeave={(e) => { e.currentTarget.style.color = C.textMuted; }}
             >
-              About Solvrex →
+              About {siteConfig.name} →
             </Link>
           </div>
         </div>

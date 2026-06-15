@@ -1,9 +1,7 @@
 // Single source of truth for the Careers page.
 // Add or edit roles here — the Open Roles section renders from this file.
 
-// Shared Google Form — the Apply button opens this in a new tab.
-export const APPLY_FORM_URL =
-  "https://docs.google.com/forms/d/e/1FAIpQLSfqfcGhR_3LsTCc1UQ6KaqdaQyAR9uxb18B7LVsHc_sKgRb-w/viewform";
+import { siteConfig } from "@/lib/site";
 
 export type Track =
   | "Tech"
@@ -35,10 +33,11 @@ export const TRACKS: Track[] = [
 ];
 
 // Identical for every role — defined once, reused on each role's `offer`.
+// Stipend/CTC figures come from siteConfig so the numbers live in one place.
 export const SHARED_OFFER: string[] = [
   "Months 1–3 — Foundation phase: hands-on work on real client projects with close mentorship",
-  "Next 6 months — Paid internship with a monthly stipend of ₹6,000–₹12,000, based on performance",
-  "Exceptional performers — Pre-Placement Offer (PPO): full-time role with annual CTC of ₹3–8 LPA",
+  `Next 6 months — Paid internship with a monthly stipend of ${siteConfig.internship.stipend}, based on performance`,
+  `Exceptional performers — Pre-Placement Offer (PPO): full-time role with annual CTC of ${siteConfig.internship.ctc}`,
   "Real ownership and the chance to grow with an early-stage startup",
   "Certificate of Internship on completion",
   "Letter of Recommendation for outstanding interns",

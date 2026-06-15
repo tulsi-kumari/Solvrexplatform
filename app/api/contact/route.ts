@@ -1,11 +1,13 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import { siteConfig } from "@/lib/site";
 
 export const runtime = "nodejs";
 
-const TO_EMAIL = process.env.CONTACT_TO_EMAIL || "solvrex.official@gmail.com";
+const TO_EMAIL = process.env.CONTACT_TO_EMAIL || siteConfig.contactEmail;
 // onboarding@resend.dev works without any DNS/domain verification.
-const FROM_EMAIL = process.env.CONTACT_FROM_EMAIL || "Solvrex <onboarding@resend.dev>";
+const FROM_EMAIL =
+  process.env.CONTACT_FROM_EMAIL || `${siteConfig.name} <onboarding@resend.dev>`;
 
 const SUBJECT_LABELS: Record<string, string> = {
   "business-enablement": "Business Enablement",
@@ -64,7 +66,7 @@ export async function POST(req: Request) {
   if (!apiKey) {
     console.error("RESEND_API_KEY is not set.");
     return NextResponse.json(
-      { error: "Email is not configured yet. Please email solvrex.official@gmail.com directly." },
+      { error: `Email is not configured yet. Please email ${TO_EMAIL} directly.` },
       { status: 500 }
     );
   }
@@ -111,7 +113,7 @@ export async function POST(req: Request) {
     if (error) {
       console.error("Resend error:", error);
       return NextResponse.json(
-        { error: "Could not send your message. Please try again or email solvrex.official@gmail.com." },
+        { error: `Could not send your message. Please try again or email ${TO_EMAIL}.` },
         { status: 502 }
       );
     }
@@ -120,7 +122,7 @@ export async function POST(req: Request) {
   } catch (err) {
     console.error("Contact route error:", err);
     return NextResponse.json(
-      { error: "Could not send your message. Please try again or email solvrex.official@gmail.com." },
+      { error: `Could not send your message. Please try again or email ${TO_EMAIL}.` },
       { status: 500 }
     );
   }

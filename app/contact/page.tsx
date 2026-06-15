@@ -1,6 +1,6 @@
 import { ContactPage } from "@/components/ContactPage";
 
-export const metadata = { title: "Contact | Solvrex" };
+export const metadata = { title: "Contact" };
 
 export default function Page() {
   return <ContactPage />;
