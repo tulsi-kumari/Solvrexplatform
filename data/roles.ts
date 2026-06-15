@@ -1,5 +1,5 @@
 // Single source of truth for the Careers page.
-// Add or edit roles here — the Open Roles section renders from this file.
+// Add or edit roles here — the careers pages render from this file.
 
 export type Track =
   | "Tech"
@@ -7,10 +7,13 @@ export type Track =
   | "Marketing"
   | "Career Services";
 
+export type Level = "entry" | "lateral";
+
 export interface Role {
   id: string;
   title: string;
   tagline: string;
+  level: Level;
   track: Track;
   location: string;
   type: string;
@@ -21,26 +24,45 @@ export interface Role {
   eligibility: string[];
 }
 
-// Filter pill order. "All" is prepended in the UI.
-export const TRACKS: Track[] = [
-  "Tech",
-  "Sales & Business Development",
-  "Marketing",
-  "Career Services",
+export interface LevelInfo {
+  id: Level;
+  slug: string;
+  name: string;
+  description: string;
+}
+
+// The two top-level groupings shown as cards on /careers.
+export const LEVELS: LevelInfo[] = [
+  {
+    id: "entry",
+    slug: "entry-level",
+    name: "Entry Level",
+    description:
+      "Early-career roles for students and recent graduates ready to do real work from day one.",
+  },
+  {
+    id: "lateral",
+    slug: "lateral",
+    name: "Lateral",
+    description:
+      "Experienced roles for specialists who want real ownership and impact at an early-stage company.",
+  },
 ];
 
 export const ROLES: Role[] = [
+  /* ── Entry level ───────────────────────────────────────────── */
   {
     id: "tech",
-    title: "Tech Intern",
+    title: "Tech Associate",
     tagline:
       "Build real software for real clients — and grow as an engineer from day one.",
+    level: "entry",
     track: "Tech",
     location: "India",
     type: "Internship · 3+ months",
     openings: 10,
     about:
-      "As a Tech Intern at Solvrex, you will work on live technology projects that we deliver for clients across different industries. You will get exposure to the full journey of a project — from understanding what a client needs to building, testing, and shipping a working solution. This is a hands-on role for students who genuinely enjoy technology and want to learn by doing. We do not expect you to know everything on day one; we care that you have strong fundamentals, a curious mind, and the drive to figure things out.",
+      "As a Tech Associate at Solvrex, you will work on live technology projects that we deliver for clients across different industries. You will get exposure to the full journey of a project — from understanding what a client needs to building, testing, and shipping a working solution. This is a hands-on role for students who genuinely enjoy technology and want to learn by doing. We do not expect you to know everything on day one; we care that you have strong fundamentals, a curious mind, and the drive to figure things out.",
     responsibilities: [
       "Contribute to web development work as part of real client solutions",
       "Take part in client engagement — understanding what clients actually need",
@@ -72,14 +94,15 @@ export const ROLES: Role[] = [
   },
   {
     id: "sales",
-    title: "Sales & Business Development Intern",
+    title: "Sales & Business Development Associate",
     tagline: "Be the voice of Solvrex — and play a direct role in our growth.",
+    level: "entry",
     track: "Sales & Business Development",
     location: "India",
     type: "Internship · 3+ months",
     openings: 10,
     about:
-      "As a Sales & Business Development Intern, you will help drive Solvrex's growth across two fronts. First, you will reach out to businesses to bring in IT consulting projects. Second, you will connect with international students and working professionals who need our Career Services. You will learn the full sales cycle in a fast-paced startup environment and see the direct impact of your work on our revenue. No prior sales experience is needed — we will teach you what you need to know.",
+      "As a Sales & Business Development Associate, you will help drive Solvrex's growth across two fronts. First, you will reach out to businesses to bring in IT consulting projects. Second, you will connect with international students and working professionals who need our Career Services. You will learn the full sales cycle in a fast-paced startup environment and see the direct impact of your work on our revenue. No prior sales experience is needed — we will teach you what you need to know.",
     responsibilities: [
       "Research and identify two types of prospects: businesses that need IT services, and international students and professionals who need career support",
       "Reach out via calls, emails, and LinkedIn to introduce Solvrex and the right offering",
@@ -111,14 +134,15 @@ export const ROLES: Role[] = [
   },
   {
     id: "marketing",
-    title: "Marketing Intern",
+    title: "Marketing Associate",
     tagline: "Build the Solvrex brand — and run marketing for our clients too.",
+    level: "entry",
     track: "Marketing",
     location: "India",
     type: "Internship · 3+ months",
     openings: 10,
     about:
-      "As a Marketing Intern at Solvrex, you will work on two exciting fronts. First, you will help grow Solvrex's own brand and digital presence from the ground up. Second, you will run marketing for our clients — the businesses our sales team brings on board. From social media and content to full campaigns, you will play a direct role in how Solvrex and our clients are seen and grow. No prior experience is needed — bring your creativity and we will help you build the rest.",
+      "As a Marketing Associate at Solvrex, you will work on two exciting fronts. First, you will help grow Solvrex's own brand and digital presence from the ground up. Second, you will run marketing for our clients — the businesses our sales team brings on board. From social media and content to full campaigns, you will play a direct role in how Solvrex and our clients are seen and grow. No prior experience is needed — bring your creativity and we will help you build the rest.",
     responsibilities: [
       "Manage and grow Solvrex's presence on LinkedIn, Instagram, and other relevant platforms",
       "Plan and run marketing campaigns for client brands once they come on board through our sales team",
@@ -152,6 +176,7 @@ export const ROLES: Role[] = [
     title: "Career Success Associate",
     tagline:
       "Help jobseekers land the roles they deserve through careful, real, human work.",
+    level: "entry",
     track: "Career Services",
     location: "India",
     type: "Internship · 3+ months",
@@ -187,8 +212,120 @@ export const ROLES: Role[] = [
       "Available for a minimum of 3 months, with the opportunity to continue based on performance",
     ],
   },
+
+  /* ── Lateral (experienced) ─────────────────────────────────── */
+  {
+    id: "software-architect",
+    title: "Software Architect",
+    tagline:
+      "Design the systems behind our clients' products — and set the technical bar.",
+    level: "lateral",
+    track: "Tech",
+    location: "India · Remote-friendly",
+    type: "Full-time · Experienced",
+    openings: 1,
+    about:
+      "As a Software Architect at Solvrex, you own the technical direction of our client engagements. You turn business goals into robust, scalable system designs, choose the right technologies, and guide our engineers through delivery — keeping quality high as we grow. This is a hands-on leadership role for someone who has built real systems and wants the ownership that comes with an early-stage team.",
+    responsibilities: [
+      "Own end-to-end architecture for client projects — from system design to technology selection",
+      "Translate business and product requirements into clear, scalable technical designs",
+      "Set engineering standards and review designs, code, and architecture decisions",
+      "Guide and mentor engineers, raising the technical bar across the team",
+      "Partner with clients and the delivery team on technical strategy and trade-offs",
+      "Lead the build of complex features and integrations, staying hands-on where it matters",
+      "Evaluate and introduce modern tooling, including AI / GenAI, to improve delivery",
+    ],
+    requirements: [
+      "6+ years building and shipping production software, including time in a senior or lead role",
+      "Strong system design and architecture skills across web and cloud applications",
+      "Hands-on experience with at least one major cloud (AWS, GCP, or Azure)",
+      "Depth in one or more modern stacks (e.g. TypeScript/Node, Python, or Java) and databases",
+      "A track record of mentoring engineers and owning technical decisions",
+      "Clear communication with both technical and non-technical stakeholders",
+    ],
+    eligibility: [
+      "6+ years of relevant professional software experience",
+      "A portfolio or references demonstrating systems you have designed and shipped",
+      "Available to start within 60 days",
+      "Based in India; remote-friendly with occasional travel as needed",
+    ],
+  },
+  {
+    id: "business-development-manager",
+    title: "Business Development Manager",
+    tagline: "Own client relationships end to end and grow our consulting business.",
+    level: "lateral",
+    track: "Sales & Business Development",
+    location: "India · Remote-friendly",
+    type: "Full-time · Experienced",
+    openings: 1,
+    about:
+      "As a Business Development Manager at Solvrex, you lead how we win and grow client relationships. You own the full cycle — from identifying opportunities to closing engagements — across our IT consulting and career services lines, and you help shape how we go to market as we scale.",
+    responsibilities: [
+      "Own the full sales cycle: prospecting, discovery, proposals, and closing",
+      "Build and manage a pipeline of business clients for IT consulting engagements",
+      "Develop partnerships and channels that bring in qualified opportunities",
+      "Lead proposals, pricing, and negotiations alongside the delivery team",
+      "Build long-term relationships and grow existing accounts",
+      "Shape go-to-market strategy and feed insights back into our offerings",
+    ],
+    requirements: [
+      "4+ years in B2B sales or business development, ideally in IT services or consulting",
+      "A track record of meeting or exceeding revenue targets",
+      "Strong commercial, negotiation, and relationship-building skills",
+      "Comfort selling technical services to business decision-makers",
+      "Excellent written and verbal communication",
+    ],
+    eligibility: [
+      "4+ years of relevant business development experience",
+      "A demonstrable history of closing and growing accounts",
+      "Available to start within 60 days",
+      "Based in India; remote-friendly",
+    ],
+  },
+  {
+    id: "marketing-lead",
+    title: "Marketing Lead",
+    tagline: "Lead brand and growth marketing for Solvrex and our clients.",
+    level: "lateral",
+    track: "Marketing",
+    location: "India · Remote-friendly",
+    type: "Full-time · Experienced",
+    openings: 1,
+    about:
+      "As our Marketing Lead, you own how Solvrex shows up in the world — and how we market our clients. You set strategy, run campaigns end to end, and build the systems, content, and (over time) the team that drive awareness, leads, and growth.",
+    responsibilities: [
+      "Own marketing strategy for Solvrex's brand and digital presence",
+      "Plan and run multi-channel campaigns for Solvrex and client accounts",
+      "Lead content, social, and performance marketing across channels",
+      "Define and track the metrics that matter — reach, leads, and conversion",
+      "Build repeatable marketing playbooks and a small team over time",
+      "Partner with sales to align messaging and support pipeline growth",
+    ],
+    requirements: [
+      "4+ years in marketing with ownership of campaigns and measurable outcomes",
+      "Experience across content, social, and performance / paid channels",
+      "Strong writing and a sharp eye for brand and design",
+      "Comfort with analytics and turning data into decisions",
+      "B2B and / or agency experience is a plus",
+    ],
+    eligibility: [
+      "4+ years of relevant marketing experience",
+      "A portfolio of campaigns and results you have owned",
+      "Available to start within 60 days",
+      "Based in India; remote-friendly",
+    ],
+  },
 ];
 
 export function getRole(id: string): Role | undefined {
   return ROLES.find((r) => r.id === id);
+}
+
+export function getLevelBySlug(slug: string): LevelInfo | undefined {
+  return LEVELS.find((l) => l.slug === slug);
+}
+
+export function getRolesByLevel(level: Level): Role[] {
+  return ROLES.filter((r) => r.level === level);
 }

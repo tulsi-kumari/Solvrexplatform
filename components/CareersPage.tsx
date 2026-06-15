@@ -1,50 +1,28 @@
 "use client";
 
-import { useMemo, useState } from "react";
 import Link from "next/link";
-import { ROLES, TRACKS, type Track } from "@/data/roles";
+import { LEVELS, getRolesByLevel } from "@/data/roles";
 import { C, eyebrow, sectionHeading } from "@/lib/theme";
 import { siteConfig } from "@/lib/site";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 
-/* ── Page-scoped CSS (responsive, hover, a11y) ───────────────── */
+/* ── Page-scoped CSS ─────────────────────────────────────────── */
 const styles = `
-  .cx-roles-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; grid-auto-rows: 1fr; }
-  .cx-card {
-    background: transparent;
-    border: none;
-    border-radius: 10px;
-    padding: 22px;
-    display: flex; flex-direction: column;
-    text-align: left; width: 100%;
+  .cx-level-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .cx-level-card {
+    display: flex; flex-direction: column; align-items: flex-start;
+    padding: 36px 32px;
+    border: 1px solid ${C.border}; border-radius: 12px;
+    background: ${C.bgSurface};
+    transition: border-color 0.15s, transform 0.15s;
   }
-  .cx-card:hover .cx-detail-btn { text-decoration: underline; }
-  .cx-card:focus-visible, .cx-pill:focus-visible, .cx-btn:focus-visible, .cx-detail-btn:focus-visible {
-    outline: 2px solid ${C.blueLight}; outline-offset: 2px;
-  }
-  .cx-pill {
-    padding: 8px 16px; border-radius: 999px; font-size: 13px; font-weight: 500;
-    border: 1px solid ${C.border}; background: transparent; color: ${C.textMuted};
-    cursor: pointer; transition: color 0.15s, background 0.15s, border-color 0.15s; white-space: nowrap;
-  }
-  .cx-pill:hover { color: ${C.text}; border-color: ${C.borderStrong}; }
-  .cx-pill[aria-pressed="true"] { background: ${C.blue}; border-color: ${C.blue}; color: #fff; }
-  @media (max-width: 620px) {
-    .cx-roles-grid { grid-template-columns: 1fr; grid-auto-rows: auto; }
-  }
+  .cx-level-card:hover { border-color: ${C.blue}; transform: translateY(-2px); }
+  .cx-level-card:focus-visible, .cx-btn:focus-visible { outline: 2px solid ${C.blueLight}; outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) { .cx-level-card { transition: none; } .cx-level-card:hover { transform: none; } }
+  @media (max-width: 620px) { .cx-level-grid { grid-template-columns: 1fr; } }
 `;
 
-/* ── Page ────────────────────────────────────────────────────── */
 export function CareersPage() {
-  const [filter, setFilter] = useState<"All" | Track>("All");
-
-  const visibleRoles = useMemo(
-    () => (filter === "All" ? ROLES : ROLES.filter((r) => r.track === filter)),
-    [filter]
-  );
-
-  const pills: ("All" | Track)[] = ["All", ...TRACKS];
-
   return (
     <div style={{ backgroundColor: C.bg }}>
       <style>{styles}</style>
@@ -89,46 +67,28 @@ export function CareersPage() {
         </div>
       </section>
 
-      {/* Open Roles */}
+      {/* Two levels */}
       <section id="open-roles" style={{ padding: "84px 0", borderBottom: `1px solid ${C.border}`, scrollMarginTop: "80px" }}>
         <div className="sx-container">
           <p style={eyebrow}>Open roles</p>
-          <h2 style={{ ...sectionHeading, maxWidth: "560px", marginBottom: "30px" }}>Find your place on the team.</h2>
+          <h2 style={{ ...sectionHeading, maxWidth: "560px", marginBottom: "36px" }}>Find your place on the team.</h2>
 
-          {/* Filter pills */}
-          <div role="group" aria-label="Filter roles by track" style={{ display: "flex", flexWrap: "wrap", gap: "10px", marginBottom: "36px" }}>
-            {pills.map((p) => (
-              <button
-                key={p}
-                type="button"
-                className="cx-pill"
-                aria-pressed={filter === p}
-                onClick={() => setFilter(p)}
-              >
-                {p}
-              </button>
-            ))}
-          </div>
-
-          {/* Cards */}
-          <div className="cx-roles-grid">
-            {visibleRoles.map((role) => (
-              <Link
-                key={role.id}
-                href={`/careers/${role.id}`}
-                className="cx-card"
-                aria-label={`View details for ${role.title}`}
-              >
-                <h3 style={{ fontSize: "19px", fontWeight: 600, color: C.text, marginBottom: "10px", letterSpacing: "-0.015em", lineHeight: 1.3 }}>{role.title}</h3>
-                <p style={{ fontSize: "14px", color: C.textMuted, lineHeight: 1.6, marginBottom: "20px", flex: 1 }}>{role.tagline}</p>
-                <span className="cx-detail-btn" style={{ display: "inline-flex", alignItems: "center", gap: "6px", fontSize: "13.5px", fontWeight: 500, color: C.blueLight }}>
-                  View details
-                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-                    <path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </span>
-              </Link>
-            ))}
+          <div className="cx-level-grid">
+            {LEVELS.map((lvl) => {
+              const count = getRolesByLevel(lvl.id).length;
+              return (
+                <Link key={lvl.id} href={`/careers/${lvl.slug}`} className="cx-level-card">
+                  <h3 style={{ fontSize: "22px", fontWeight: 500, color: C.text, letterSpacing: "-0.02em", marginBottom: "12px" }}>{lvl.name}</h3>
+                  <p style={{ fontSize: "14.5px", color: C.textMuted, lineHeight: 1.65, marginBottom: "28px", flex: 1 }}>{lvl.description}</p>
+                  <span style={{ display: "inline-flex", alignItems: "center", gap: "8px", fontSize: "13.5px", fontWeight: 500, color: C.blueLight }}>
+                    {count} open {count === 1 ? "role" : "roles"}
+                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true">
+                      <path d="M2 6.5h9M8 3.5l3 3-3 3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </span>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
