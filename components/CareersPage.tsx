@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
-import { ROLES, TRACKS, type Role, type Track } from "@/data/roles";
+import { useMemo, useState } from "react";
+import Link from "next/link";
+import { ROLES, TRACKS, type Track } from "@/data/roles";
 import { C, eyebrow, sectionHeading } from "@/lib/theme";
 import { siteConfig } from "@/lib/site";
-import { BulletList } from "@/components/ui/BulletList";
 
-/* ── Page-scoped CSS (responsive, hover, motion, a11y) ───────── */
+/* ── Page-scoped CSS (responsive, hover, a11y) ───────────────── */
 const styles = `
   .cx-roles-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; grid-auto-rows: 1fr; }
   .cx-card {
@@ -16,10 +16,9 @@ const styles = `
     padding: 22px;
     display: flex; flex-direction: column;
     text-align: left; width: 100%;
-    cursor: pointer;
   }
   .cx-card:hover .cx-detail-btn { text-decoration: underline; }
-  .cx-card:focus-visible, .cx-pill:focus-visible, .cx-btn:focus-visible, .cx-modal-close:focus-visible, .cx-detail-btn:focus-visible {
+  .cx-card:focus-visible, .cx-pill:focus-visible, .cx-btn:focus-visible, .cx-detail-btn:focus-visible {
     outline: 2px solid ${C.blueLight}; outline-offset: 2px;
   }
   .cx-pill {
@@ -29,205 +28,14 @@ const styles = `
   }
   .cx-pill:hover { color: ${C.text}; border-color: ${C.borderStrong}; }
   .cx-pill[aria-pressed="true"] { background: ${C.blue}; border-color: ${C.blue}; color: #fff; }
-  .cx-overlay {
-    position: fixed; inset: 0; z-index: 1000; background: rgba(5,6,12,0.72);
-    display: flex; align-items: flex-start; justify-content: center;
-    padding: 48px 20px; overflow-y: auto; animation: cxFade 0.2s ease;
-  }
-  .cx-modal {
-    width: 100%; max-width: 720px; background: ${C.bgSurface};
-    border: 1px solid ${C.border}; border-radius: 14px; position: relative;
-    animation: cxRise 0.22s cubic-bezier(0.16,1,0.3,1);
-  }
-  @keyframes cxFade { from { opacity: 0; } to { opacity: 1; } }
-  @keyframes cxRise { from { opacity: 0; transform: translateY(12px) scale(0.99); } to { opacity: 1; transform: none; } }
-  @media (prefers-reduced-motion: reduce) {
-    .cx-card, .cx-overlay, .cx-modal { animation: none !important; transition: none !important; }
-    .cx-card:hover { transform: none; }
-  }
   @media (max-width: 620px) {
     .cx-roles-grid { grid-template-columns: 1fr; grid-auto-rows: auto; }
   }
 `;
 
-/* ── Small presentational helpers ────────────────────────────── */
-function TrackBadge({ track }: { track: Track }) {
-  return (
-    <span
-      style={{
-        display: "inline-flex",
-        alignItems: "center",
-        padding: "4px 10px",
-        borderRadius: "999px",
-        fontSize: "11px",
-        fontWeight: 600,
-        letterSpacing: "0.03em",
-        color: C.blueLight,
-        background: "rgba(77,124,255,0.1)",
-        border: "1px solid rgba(77,124,255,0.2)",
-      }}
-    >
-      {track}
-    </span>
-  );
-}
-
-function MetaRow({ role }: { role: Role }) {
-  return (
-    <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "8px", fontSize: "12.5px", color: C.textMuted }}>
-      <span>{role.type}</span>
-      <span style={{ color: C.borderStrong }}>·</span>
-      <span>{role.location}</span>
-      <span style={{ color: C.borderStrong }}>·</span>
-      <span>{role.openings} openings</span>
-    </div>
-  );
-}
-
-function DetailList({ heading, items }: { heading: string; items: string[] }) {
-  if (!items || items.length === 0) return null;
-  return (
-    <div style={{ marginTop: "28px" }}>
-      <h3 style={{ fontSize: "12px", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: C.textSubtle, marginBottom: "14px" }}>
-        {heading}
-      </h3>
-      <BulletList items={items} />
-    </div>
-  );
-}
-
-/* ── Role detail modal (accessible) ──────────────────────────── */
-function RoleModal({ role, onClose }: { role: Role; onClose: () => void }) {
-  const dialogRef = useRef<HTMLDivElement>(null);
-  const closeRef = useRef<HTMLButtonElement>(null);
-  const titleId = `role-${role.id}-title`;
-
-  useEffect(() => {
-    const prevFocused = document.activeElement as HTMLElement | null;
-    const prevOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    closeRef.current?.focus();
-
-    function onKeyDown(e: KeyboardEvent) {
-      if (e.key === "Escape") {
-        e.preventDefault();
-        onClose();
-        return;
-      }
-      if (e.key === "Tab" && dialogRef.current) {
-        const focusables = dialogRef.current.querySelectorAll<HTMLElement>(
-          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
-        );
-        if (focusables.length === 0) return;
-        const first = focusables[0];
-        const last = focusables[focusables.length - 1];
-        if (e.shiftKey && document.activeElement === first) {
-          e.preventDefault();
-          last.focus();
-        } else if (!e.shiftKey && document.activeElement === last) {
-          e.preventDefault();
-          first.focus();
-        }
-      }
-    }
-
-    document.addEventListener("keydown", onKeyDown);
-    return () => {
-      document.removeEventListener("keydown", onKeyDown);
-      document.body.style.overflow = prevOverflow;
-      prevFocused?.focus?.();
-    };
-  }, [role.id, onClose]);
-
-  return (
-    <div
-      className="cx-overlay"
-      onMouseDown={(e) => {
-        if (e.target === e.currentTarget) onClose();
-      }}
-    >
-      <div
-        ref={dialogRef}
-        className="cx-modal"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby={titleId}
-      >
-        {/* Header */}
-        <div style={{ padding: "30px 34px 24px", borderBottom: `1px solid ${C.border}` }}>
-          <button
-            ref={closeRef}
-            className="cx-modal-close"
-            onClick={onClose}
-            aria-label="Close"
-            style={{
-              position: "absolute", top: "20px", right: "22px",
-              width: "34px", height: "34px", borderRadius: "8px",
-              border: `1px solid ${C.border}`, background: C.bgRaised, color: C.textMuted,
-              display: "inline-flex", alignItems: "center", justifyContent: "center",
-            }}
-          >
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-              <path d="M3 3l8 8M11 3l-8 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-            </svg>
-          </button>
-          <div style={{ marginBottom: "14px" }}>
-            <TrackBadge track={role.track} />
-          </div>
-          <h2 id={titleId} style={{ fontSize: "24px", fontWeight: 500, color: C.text, letterSpacing: "-0.02em", marginBottom: "10px", maxWidth: "560px" }}>
-            {role.title}
-          </h2>
-          <p style={{ fontSize: "14.5px", color: C.textMuted, lineHeight: 1.6, marginBottom: "16px", maxWidth: "560px" }}>
-            {role.tagline}
-          </p>
-          <MetaRow role={role} />
-        </div>
-
-        {/* Body */}
-        <div style={{ padding: "8px 34px 30px" }}>
-          {role.about && (
-            <div style={{ marginTop: "24px" }}>
-              <h3 style={{ fontSize: "12px", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: C.textSubtle, marginBottom: "12px" }}>
-                About the role
-              </h3>
-              <p style={{ fontSize: "15px", color: C.textBody, lineHeight: 1.7 }}>{role.about}</p>
-            </div>
-          )}
-          <DetailList heading="Key responsibilities" items={role.responsibilities} />
-          <DetailList heading="Skills & requirements" items={role.requirements} />
-          <DetailList heading="Eligibility" items={role.eligibility} />
-
-          <div style={{ marginTop: "32px", display: "flex", flexWrap: "wrap", gap: "12px", alignItems: "center" }}>
-            <a
-              className="cx-btn"
-              href={siteConfig.applyFormUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                display: "inline-flex", alignItems: "center", gap: "8px",
-                padding: "12px 26px", backgroundColor: C.blue, color: "#fff",
-                borderRadius: "3px", fontSize: "14px", fontWeight: 500,
-                transition: "background-color 0.15s",
-              }}
-              onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = C.blueHover; }}
-              onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = C.blue; }}
-            >
-              Apply now
-              <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true">
-                <path d="M2 6.5h9M8 3.5l3 3-3 3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 /* ── Page ────────────────────────────────────────────────────── */
 export function CareersPage() {
   const [filter, setFilter] = useState<"All" | Track>("All");
-  const [selected, setSelected] = useState<Role | null>(null);
 
   const visibleRoles = useMemo(
     () => (filter === "All" ? ROLES : ROLES.filter((r) => r.track === filter)),
@@ -303,11 +111,10 @@ export function CareersPage() {
           {/* Cards */}
           <div className="cx-roles-grid">
             {visibleRoles.map((role) => (
-              <button
+              <Link
                 key={role.id}
-                type="button"
+                href={`/careers/${role.id}`}
                 className="cx-card"
-                onClick={() => setSelected(role)}
                 aria-label={`View details for ${role.title}`}
               >
                 <h3 style={{ fontSize: "19px", fontWeight: 600, color: C.text, marginBottom: "10px", letterSpacing: "-0.015em", lineHeight: 1.3 }}>{role.title}</h3>
@@ -318,7 +125,7 @@ export function CareersPage() {
                     <path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </span>
-              </button>
+              </Link>
             ))}
           </div>
         </div>
@@ -358,8 +165,6 @@ export function CareersPage() {
           </div>
         </div>
       </section>
-
-      {selected && <RoleModal role={selected} onClose={() => setSelected(null)} />}
     </div>
   );
 }

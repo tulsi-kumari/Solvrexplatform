@@ -188,3 +188,7 @@ export const ROLES: Role[] = [
     ],
   },
 ];
+
+export function getRole(id: string): Role | undefined {
+  return ROLES.find((r) => r.id === id);
+}
