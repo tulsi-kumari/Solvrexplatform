@@ -121,6 +121,7 @@ export function Navbar() {
 
           {[
             { label: 'About', to: '/about' },
+            { label: 'Careers', to: '/careers' },
             { label: 'Contact', to: '/contact' },
           ].map((link) => (
             <Link
@@ -234,8 +235,9 @@ export function Navbar() {
             {[
               { label: 'Services', to: '/services' },
               { label: 'About', to: '/about' },
+              { label: 'Careers', to: '/careers' },
               { label: 'Contact', to: '/contact' },
-            ].map((link, i) => (
+            ].map((link, i, arr) => (
               <Link
                 key={link.to}
                 href={link.to}
@@ -245,7 +247,7 @@ export function Navbar() {
                   padding: '14px 24px',
                   fontSize: '15px',
                   color: pathname.startsWith(link.to) ? C.text : C.textMuted,
-                  borderBottom: i < 2 ? `1px solid ${C.border}` : 'none',
+                  borderBottom: i < arr.length - 1 ? `1px solid ${C.border}` : 'none',
                 }}
               >
                 {link.label}
