@@ -1,8 +1,6 @@
 // Single source of truth for the Careers page.
 // Add or edit roles here — the Open Roles section renders from this file.
 
-import { siteConfig } from "@/lib/site";
-
 export type Track =
   | "Tech"
   | "Sales & Business Development"
@@ -21,7 +19,6 @@ export interface Role {
   responsibilities: string[];
   requirements: string[];
   eligibility: string[];
-  offer: string[];
 }
 
 // Filter pill order. "All" is prepended in the UI.
@@ -30,17 +27,6 @@ export const TRACKS: Track[] = [
   "Sales & Business Development",
   "Marketing",
   "Career Services",
-];
-
-// Identical for every role — defined once, reused on each role's `offer`.
-// Stipend/CTC figures come from siteConfig so the numbers live in one place.
-export const SHARED_OFFER: string[] = [
-  "Months 1–3 — Foundation phase: hands-on work on real client projects with close mentorship",
-  `Next 6 months — Paid internship with a monthly stipend of ${siteConfig.internship.stipend}, based on performance`,
-  `Exceptional performers — Pre-Placement Offer (PPO): full-time role with annual CTC of ${siteConfig.internship.ctc}`,
-  "Real ownership and the chance to grow with an early-stage startup",
-  "Certificate of Internship on completion",
-  "Letter of Recommendation for outstanding interns",
 ];
 
 export const ROLES: Role[] = [
@@ -83,7 +69,6 @@ export const ROLES: Role[] = [
       "No active backlogs",
       "Available for a minimum of 3 months, with the opportunity to continue based on performance",
     ],
-    offer: SHARED_OFFER,
   },
   {
     id: "sales",
@@ -123,7 +108,6 @@ export const ROLES: Role[] = [
       "No active backlogs",
       "Available for a minimum of 3 months, with the opportunity to continue based on performance",
     ],
-    offer: SHARED_OFFER,
   },
   {
     id: "marketing",
@@ -162,7 +146,6 @@ export const ROLES: Role[] = [
       "No active backlogs",
       "Available for a minimum of 3 months, with the opportunity to continue based on performance",
     ],
-    offer: SHARED_OFFER,
   },
   {
     id: "career",
@@ -203,6 +186,5 @@ export const ROLES: Role[] = [
       "No active backlogs",
       "Available for a minimum of 3 months, with the opportunity to continue based on performance",
     ],
-    offer: SHARED_OFFER,
   },
 ];

@@ -14,10 +14,4 @@ export const siteConfig = {
   // Shared Google Form the Careers "Apply" button opens.
   applyFormUrl:
     "https://docs.google.com/forms/d/e/1FAIpQLSfqfcGhR_3LsTCc1UQ6KaqdaQyAR9uxb18B7LVsHc_sKgRb-w/viewform",
-  // Internship figures — referenced by both the careers copy and role offers,
-  // so the numbers live in exactly one place.
-  internship: {
-    stipend: "₹6,000–₹12,000",
-    ctc: "₹3–8 LPA",
-  },
 } as const;

@@ -197,7 +197,6 @@ function RoleModal({ role, onClose }: { role: Role; onClose: () => void }) {
           <DetailList heading="Key responsibilities" items={role.responsibilities} />
           <DetailList heading="Skills & requirements" items={role.requirements} />
           <DetailList heading="Eligibility" items={role.eligibility} />
-          <DetailList heading="What we offer" items={role.offer} />
 
           <div style={{ marginTop: "32px", display: "flex", flexWrap: "wrap", gap: "12px", alignItems: "center" }}>
             <a
