@@ -8,7 +8,7 @@ import { BulletList } from "@/components/ui/BulletList";
 
 /* ── Page-scoped CSS (responsive, hover, motion, a11y) ───────── */
 const styles = `
-  .cx-roles-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .cx-roles-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; grid-auto-rows: 1fr; }
   .cx-card {
     background: transparent;
     border: none;
@@ -47,7 +47,7 @@ const styles = `
     .cx-card:hover { transform: none; }
   }
   @media (max-width: 620px) {
-    .cx-roles-grid { grid-template-columns: 1fr; }
+    .cx-roles-grid { grid-template-columns: 1fr; grid-auto-rows: auto; }
   }
 `;
 
