@@ -9,8 +9,6 @@ import { BulletList } from "@/components/ui/BulletList";
 /* ── Page-scoped CSS (responsive, hover, motion, a11y) ───────── */
 const styles = `
   .cx-roles-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-  .cx-values-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
-  .cx-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; position: relative; }
   .cx-card {
     background: ${C.bgSurface};
     border: 1px solid ${C.border};
@@ -48,13 +46,8 @@ const styles = `
     .cx-card, .cx-overlay, .cx-modal { animation: none !important; transition: none !important; }
     .cx-card:hover { transform: none; }
   }
-  @media (max-width: 880px) {
-    .cx-values-grid { grid-template-columns: repeat(2, 1fr); }
-    .cx-steps { grid-template-columns: 1fr; }
-  }
   @media (max-width: 620px) {
     .cx-roles-grid { grid-template-columns: 1fr; }
-    .cx-values-grid { grid-template-columns: 1fr; }
   }
 `;
 
@@ -234,20 +227,6 @@ function RoleModal({ role, onClose }: { role: Role; onClose: () => void }) {
   );
 }
 
-/* ── Static section content ──────────────────────────────────── */
-const VALUES = [
-  { title: "Real ownership", body: "You won't shadow from the sidelines. You'll own meaningful pieces of real client work from week one." },
-  { title: "Learn fast", body: "Close mentorship and a steep, supported learning curve — you'll grow more in months than most do in a year." },
-  { title: "Grow with an early-stage startup", body: "Join at the ground floor and help shape how Solvrex works as we build it together." },
-  { title: "Performance-based growth", body: "Stipends, paid internships, and pre-placement offers are earned on merit — your impact decides your path." },
-];
-
-const STEPS = [
-  { n: "01", title: "Foundation phase", when: "Months 1–3", body: "Hands-on work on real client projects with close mentorship as you find your feet." },
-  { n: "02", title: "Paid internship", when: "Next 6 months", body: `A monthly stipend of ${siteConfig.internship.stipend}, based on your performance during the foundation phase.` },
-  { n: "03", title: "Pre-Placement Offer", when: "For exceptional performers", body: `A full-time role with an annual CTC of ${siteConfig.internship.ctc} for those who stand out.` },
-];
-
 /* ── Page ────────────────────────────────────────────────────── */
 export function CareersPage() {
   const [filter, setFilter] = useState<"All" | Track>("All");
@@ -278,7 +257,7 @@ export function CareersPage() {
         <div className="sx-container" style={{ position: "relative" }}>
           <p style={eyebrow}>Careers at Solvrex</p>
           <h1 style={{ fontSize: "clamp(38px, 5.5vw, 64px)", fontWeight: 300, color: C.text, lineHeight: 1.1, letterSpacing: "-0.03em", marginBottom: "26px", maxWidth: "760px" }}>
-            Build something from the ground up — as part of our founding intern team.
+            Build something from the ground up — as part of our founding team.
           </h1>
           <p style={{ fontSize: "18px", color: C.textMuted, lineHeight: 1.6, marginBottom: "44px", maxWidth: "560px" }}>
             Solvrex is human-led and technology-enabled. Join early, do real work, and grow with us.
@@ -300,46 +279,6 @@ export function CareersPage() {
               <path d="M6.5 2v9M3.5 8l3 3 3-3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </a>
-        </div>
-      </section>
-
-      {/* Why Solvrex */}
-      <section id="why-solvrex" style={{ padding: "84px 0", borderBottom: `1px solid ${C.border}` }}>
-        <div className="sx-container">
-          <p style={eyebrow}>Why Solvrex</p>
-          <h2 style={{ ...sectionHeading, maxWidth: "560px", marginBottom: "18px" }}>An early seat with real responsibility.</h2>
-          <p style={{ fontSize: "16px", color: C.textMuted, lineHeight: 1.7, maxWidth: "620px", marginBottom: "44px" }}>
-            We&apos;re small, which means your work matters from day one. Here&apos;s what you can expect as part of the team.
-          </p>
-          <div className="cx-values-grid">
-            {VALUES.map((v) => (
-              <div key={v.title} style={{ background: C.bgSurface, border: `1px solid ${C.border}`, borderRadius: "10px", padding: "24px" }}>
-                <div style={{ width: "32px", height: "32px", borderRadius: "8px", background: "rgba(77,124,255,0.1)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "18px" }} aria-hidden="true">
-                  <span style={{ width: "8px", height: "8px", borderRadius: "50%", background: C.blue, display: "block" }} />
-                </div>
-                <h3 style={{ fontSize: "15px", fontWeight: 600, color: C.text, marginBottom: "10px", letterSpacing: "-0.01em" }}>{v.title}</h3>
-                <p style={{ fontSize: "13.5px", color: C.textMuted, lineHeight: 1.6 }}>{v.body}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* How It Works */}
-      <section id="how-it-works" style={{ padding: "84px 0", borderBottom: `1px solid ${C.border}` }}>
-        <div className="sx-container">
-          <p style={eyebrow}>How it works</p>
-          <h2 style={{ ...sectionHeading, maxWidth: "560px", marginBottom: "44px" }}>The internship journey.</h2>
-          <ol className="cx-steps" style={{ listStyle: "none" }}>
-            {STEPS.map((s) => (
-              <li key={s.n} style={{ background: C.bgSurface, border: `1px solid ${C.border}`, borderRadius: "10px", padding: "28px 26px" }}>
-                <div style={{ fontSize: "13px", fontWeight: 700, color: C.blue, letterSpacing: "0.05em", marginBottom: "18px", fontVariantNumeric: "tabular-nums" }}>{s.n}</div>
-                <p style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: C.textSubtle, marginBottom: "8px" }}>{s.when}</p>
-                <h3 style={{ fontSize: "17px", fontWeight: 600, color: C.text, marginBottom: "12px", letterSpacing: "-0.01em" }}>{s.title}</h3>
-                <p style={{ fontSize: "14px", color: C.textMuted, lineHeight: 1.65 }}>{s.body}</p>
-              </li>
-            ))}
-          </ol>
         </div>
       </section>
 
