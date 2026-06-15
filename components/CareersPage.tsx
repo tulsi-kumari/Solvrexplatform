@@ -8,18 +8,14 @@ import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 
 /* ── Page-scoped CSS ─────────────────────────────────────────── */
 const styles = `
-  .cx-level-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .cx-level-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; grid-auto-rows: 1fr; }
   .cx-level-card {
     display: flex; flex-direction: column; align-items: flex-start;
-    padding: 36px 32px;
-    border: 1px solid ${C.border}; border-radius: 12px;
-    background: ${C.bgSurface};
-    transition: border-color 0.15s, transform 0.15s;
+    padding: 22px; border-radius: 10px;
   }
-  .cx-level-card:hover { border-color: ${C.blue}; transform: translateY(-2px); }
+  .cx-level-card:hover .cx-level-cta { text-decoration: underline; }
   .cx-level-card:focus-visible, .cx-btn:focus-visible { outline: 2px solid ${C.blueLight}; outline-offset: 2px; }
-  @media (prefers-reduced-motion: reduce) { .cx-level-card { transition: none; } .cx-level-card:hover { transform: none; } }
-  @media (max-width: 620px) { .cx-level-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 620px) { .cx-level-grid { grid-template-columns: 1fr; grid-auto-rows: auto; } }
 `;
 
 export function CareersPage() {
@@ -78,9 +74,9 @@ export function CareersPage() {
               const count = getRolesByLevel(lvl.id).length;
               return (
                 <Link key={lvl.id} href={`/careers/${lvl.slug}`} className="cx-level-card">
-                  <h3 style={{ fontSize: "22px", fontWeight: 500, color: C.text, letterSpacing: "-0.02em", marginBottom: "12px" }}>{lvl.name}</h3>
-                  <p style={{ fontSize: "14.5px", color: C.textMuted, lineHeight: 1.65, marginBottom: "28px", flex: 1 }}>{lvl.description}</p>
-                  <span style={{ display: "inline-flex", alignItems: "center", gap: "8px", fontSize: "13.5px", fontWeight: 500, color: C.blueLight }}>
+                  <h3 style={{ fontSize: "19px", fontWeight: 600, color: C.text, letterSpacing: "-0.015em", lineHeight: 1.3, marginBottom: "10px" }}>{lvl.name}</h3>
+                  <p style={{ fontSize: "14px", color: C.textMuted, lineHeight: 1.6, marginBottom: "20px", flex: 1 }}>{lvl.description}</p>
+                  <span className="cx-level-cta" style={{ display: "inline-flex", alignItems: "center", gap: "6px", fontSize: "13.5px", fontWeight: 500, color: C.blueLight }}>
                     {count} open {count === 1 ? "role" : "roles"}
                     <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true">
                       <path d="M2 6.5h9M8 3.5l3 3-3 3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
