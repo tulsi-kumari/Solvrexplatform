@@ -218,7 +218,6 @@ function RoleModal({ role, onClose }: { role: Role; onClose: () => void }) {
                 <path d="M2 6.5h9M8 3.5l3 3-3 3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </a>
-            <span style={{ fontSize: "12.5px", color: C.textSubtle }}>Opens our application form in a new tab</span>
           </div>
         </div>
       </div>
