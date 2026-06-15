@@ -10,16 +10,16 @@ import { BulletList } from "@/components/ui/BulletList";
 const styles = `
   .cx-roles-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
   .cx-card {
-    background: ${C.bgSurface};
-    border: 1px solid ${C.border};
+    background: transparent;
+    border: none;
     border-radius: 10px;
-    padding: 26px 26px 22px;
+    padding: 22px;
     display: flex; flex-direction: column;
     text-align: left; width: 100%;
     cursor: pointer;
-    transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+    transition: background-color 0.15s ease;
   }
-  .cx-card:hover { transform: translateY(-3px); border-color: ${C.borderStrong}; box-shadow: 0 12px 32px rgba(0,0,0,0.45); }
+  .cx-card:hover { background: ${C.bgSurface}; }
   .cx-card:focus-visible, .cx-pill:focus-visible, .cx-btn:focus-visible, .cx-modal-close:focus-visible, .cx-detail-btn:focus-visible {
     outline: 2px solid ${C.blueLight}; outline-offset: 2px;
   }
@@ -312,14 +312,8 @@ export function CareersPage() {
                 onClick={() => setSelected(role)}
                 aria-label={`View details for ${role.title}`}
               >
-                <div style={{ marginBottom: "16px" }}>
-                  <TrackBadge track={role.track} />
-                </div>
                 <h3 style={{ fontSize: "19px", fontWeight: 600, color: C.text, marginBottom: "10px", letterSpacing: "-0.015em", lineHeight: 1.3 }}>{role.title}</h3>
                 <p style={{ fontSize: "14px", color: C.textMuted, lineHeight: 1.6, marginBottom: "20px", flex: 1 }}>{role.tagline}</p>
-                <div style={{ marginBottom: "18px" }}>
-                  <MetaRow role={role} />
-                </div>
                 <span className="cx-detail-btn" style={{ display: "inline-flex", alignItems: "center", gap: "6px", fontSize: "13.5px", fontWeight: 500, color: C.blueLight }}>
                   View details
                   <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
