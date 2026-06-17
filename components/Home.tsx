@@ -94,7 +94,6 @@ export function Home() {
               Explore Career Services →
             </Link>
           </div>
-          <p style={{ fontSize: "13px", color: C.textSubtle, letterSpacing: "0.02em" }}>Human-led. Technology-enabled.</p>
           </div>
           <div style={{ marginTop: "56px" }}><CareerJourney /></div>
         </div>

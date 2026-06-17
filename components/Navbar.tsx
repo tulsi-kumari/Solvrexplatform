@@ -168,15 +168,14 @@ export function Navbar() {
 
           <Link
             href="/book"
-            onMouseEnter={() => setOpenMenu(null)}
             style={{
-              marginLeft: "10px", display: "inline-flex", alignItems: "center",
-              padding: "8px 16px", borderRadius: "3px",
-              background: C.blue, color: "#fff", fontSize: "14px", fontWeight: 500,
-              transition: "background-color 0.15s",
+              marginLeft: "12px", display: "inline-flex", alignItems: "center",
+              height: "34px", padding: "0 16px", borderRadius: "4px",
+              background: C.blue, color: "#fff", fontSize: "13.5px", fontWeight: 500,
+              lineHeight: 1, whiteSpace: "nowrap", transition: "background-color 0.15s",
             }}
-            onMouseOver={(e) => { e.currentTarget.style.backgroundColor = C.blueHover; }}
-            onMouseOut={(e) => { e.currentTarget.style.backgroundColor = C.blue; }}
+            onMouseEnter={(e) => { setOpenMenu(null); e.currentTarget.style.backgroundColor = C.blueHover; }}
+            onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = C.blue; }}
           >
             Book Consultation
           </Link>
