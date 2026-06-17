@@ -175,7 +175,7 @@ export function Navbar() {
         </Link>
 
         {/* Desktop nav (>= 1024px) */}
-        <nav style={{ display: "flex", alignItems: "center", gap: "2px" }} className="hidden lg:flex">
+        <nav className="sx-desktop-nav">
           {MENUS.map((menu) => {
             const isOpen = openMenu === menu.key;
             const isActive = pathname.startsWith(menu.basePath);
@@ -223,7 +223,7 @@ export function Navbar() {
         </nav>
 
         {/* Tablet + mobile cluster (< 1024px): Book + hamburger */}
-        <div className="flex lg:hidden" style={{ alignItems: "center", gap: "10px" }}>
+        <div className="sx-mobile-nav">
           <BookButton compact />
           <button
             onClick={() => setMobileOpen(true)}
@@ -241,7 +241,7 @@ export function Navbar() {
       {/* ── Mega menu panel (desktop) ── */}
       {activeMenu && (
         <div
-          className="hidden lg:block"
+          className="sx-mega"
           style={{
             position: "absolute", top: "64px", left: 0, right: 0,
             backgroundColor: C.bgSurface, borderTop: `2px solid ${C.blue}`,
@@ -296,7 +296,7 @@ export function Navbar() {
       )}
 
       {/* ── Slide-out drawer (tablet + mobile) ── */}
-      <div className="lg:hidden">
+      <div className="sx-drawer-wrap">
         <div
           className={`sx-drawer-overlay${mobileOpen ? " open" : ""}`}
           onClick={() => setMobileOpen(false)}
