@@ -1,122 +1,33 @@
-"use client";
-
-import Link from 'next/link';
-import { C } from '@/lib/theme';
-import { siteConfig } from '@/lib/site';
-import { SERVICES } from '@/data/services';
-
-const displayDomain = siteConfig.url.replace(/^https?:\/\//, '');
-
-const columnLabel = {
-  fontSize: '10.5px',
-  fontWeight: 600,
-  letterSpacing: '0.1em',
-  textTransform: 'uppercase' as const,
-  color: C.textSubtle,
-  marginBottom: '18px',
-};
-
-const linkStyle = {
-  display: 'block',
-  fontSize: '13px',
-  color: C.textMuted,
-  marginBottom: '11px',
-  transition: 'color 0.15s',
-};
-
-function FooterLink({ href, children }: { href: string; children: React.ReactNode }) {
-  return (
-    <Link
-      href={href}
-      style={linkStyle}
-      onMouseEnter={(e) => { e.currentTarget.style.color = C.text; }}
-      onMouseLeave={(e) => { e.currentTarget.style.color = C.textMuted; }}
-    >
-      {children}
-    </Link>
-  );
-}
+import Link from "next/link";
+import { C } from "@/lib/theme";
+import { siteConfig } from "@/lib/site";
 
 export function Footer() {
-  const services = SERVICES.map((s) => [s.title, `/services/${s.slug}`] as const);
-  const company = [
-    ['About', '/about'],
-    ['Services', '/services'],
-    ['Careers', '/careers'],
-    ['Contact', '/contact'],
-  ] as const;
+  const year = new Date().getFullYear();
 
   return (
     <footer style={{ backgroundColor: C.bgFooter, borderTop: `1px solid ${C.border}` }}>
-      <div className="sx-container">
-        {/* Main grid */}
-        <div
-          className="sx-footer-grid"
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '2fr 1fr 1fr 1fr',
-            gap: '64px',
-            padding: '56px 0 48px',
-            borderBottom: `1px solid ${C.border}`,
-          }}
-        >
-          {/* Brand */}
-          <div>
-            <p style={{ fontSize: '15px', fontWeight: 600, color: C.text, marginBottom: '14px', letterSpacing: '-0.01em' }}>
-              {siteConfig.name}
-            </p>
-            <p style={{ fontSize: '13px', color: C.textMuted, lineHeight: 1.75, maxWidth: '220px' }}>
-              Practical technology and business solutions for organizations built to last.
-            </p>
-            <p style={{ marginTop: '24px', fontSize: '12px', color: C.textSubtle }}>
-              {siteConfig.contactEmail}
-            </p>
-          </div>
-
-          {/* Services */}
-          <div>
-            <p style={columnLabel}>Services</p>
-            {services.map(([label, href]) => (
-              <FooterLink key={label} href={href}>{label}</FooterLink>
-            ))}
-          </div>
-
-          {/* Company */}
-          <div>
-            <p style={columnLabel}>Company</p>
-            {company.map(([label, href]) => (
-              <FooterLink key={label} href={href}>{label}</FooterLink>
-            ))}
-          </div>
-
-          {/* Contact */}
-          <div>
-            <p style={columnLabel}>Get in touch</p>
-            <a
-              href={`mailto:${siteConfig.contactEmail}`}
-              style={linkStyle}
-              onMouseEnter={(e) => { e.currentTarget.style.color = C.text; }}
-              onMouseLeave={(e) => { e.currentTarget.style.color = C.textMuted; }}
-            >
-              {siteConfig.contactEmail}
-            </a>
-            <Link
-              href="/contact"
-              style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', marginTop: '12px', fontSize: '12px', color: C.blue, fontWeight: 500 }}
-            >
-              Send an inquiry →
-            </Link>
-          </div>
-        </div>
-
-        {/* Bottom bar */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '52px' }}>
-          <p style={{ fontSize: '12px', color: C.textSubtle }}>
-            © {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
-          </p>
-          <p style={{ fontSize: '12px', color: C.textSubtle }}>
-            {displayDomain}
-          </p>
+      <div
+        className="sx-container"
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: "16px",
+          padding: "22px 0",
+        }}
+      >
+        <p style={{ fontSize: "13px", color: C.textSubtle }}>
+          © {year} {siteConfig.name}. All rights reserved.
+        </p>
+        <div style={{ display: "flex", alignItems: "center", gap: "24px", flexWrap: "wrap" }}>
+          <a href={`mailto:${siteConfig.contactEmail}`} style={{ fontSize: "13px", color: C.textMuted }}>
+            {siteConfig.contactEmail}
+          </a>
+          <Link href="/contact" style={{ fontSize: "13px", color: C.blueLight, fontWeight: 500 }}>
+            Contact
+          </Link>
         </div>
       </div>
     </footer>
