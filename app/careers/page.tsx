@@ -1,10 +1,12 @@
 import { CareersPage } from "@/components/CareersPage";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: { absolute: "Careers at Solvrex | Join Our Team" },
+export const metadata = pageMetadata({
+  title: "Careers at Solvrex | Join Our Team",
   description:
-    "Join Solvrex's founding team. Open roles across Tech, Sales & Business Development, Marketing, and Career Services.",
-};
+    "Explore open roles at Solvrex. Join our founding team across entry-level and lateral positions in technology, sales, marketing, and career services.",
+  path: "/careers",
+});
 
 export default function Page() {
   return <CareersPage />;

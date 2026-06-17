@@ -1,4 +1,5 @@
 import type { CSSProperties } from "react";
+import Link from "next/link";
 import { C, eyebrow, pageH1, metaLabel } from "@/lib/theme";
 import { BulletList } from "@/components/ui/BulletList";
 import { ContactCallout } from "@/components/ui/ContactCallout";
@@ -50,6 +51,15 @@ export function ServiceDetailPage({ service }: { service: Service }) {
         </div>
       </section>
 
+      <section style={{ padding: "0 0 8px" }}>
+        <div className="sx-container">
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "22px" }}>
+            <Link href="/resources" style={{ fontSize: "14px", color: C.blueLight, fontWeight: 500 }}>Career resources →</Link>
+            <Link href="/pricing" style={{ fontSize: "14px", color: C.blueLight, fontWeight: 500 }}>Pricing →</Link>
+            <Link href="/book" style={{ fontSize: "14px", color: C.blueLight, fontWeight: 500 }}>Book a consultation →</Link>
+          </div>
+        </div>
+      </section>
       <ContactCallout />
     </div>
   );

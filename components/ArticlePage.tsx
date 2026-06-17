@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { C, eyebrow, pageH1 } from "@/lib/theme";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { BulletList } from "@/components/ui/BulletList";
@@ -40,6 +41,13 @@ export function ArticlePage({ article }: { article: Article }) {
           )}
 
           <div style={{ marginTop: "8px", paddingTop: "32px", borderTop: `1px solid ${C.border}` }}>
+            <p style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: C.textSubtle, marginBottom: "16px" }}>
+              Next steps
+            </p>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "22px", alignItems: "center", marginBottom: "24px" }}>
+              <Link href="/services/career-services" style={{ fontSize: "14px", color: C.blueLight, fontWeight: 500 }}>Career Services →</Link>
+              <Link href="/pricing" style={{ fontSize: "14px", color: C.blueLight, fontWeight: 500 }}>Pricing →</Link>
+            </div>
             <PrimaryLink href="/book">
               Book a consultation
               <ArrowRight />

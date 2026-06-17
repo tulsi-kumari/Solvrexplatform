@@ -2,6 +2,8 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { RESOURCES, getArticle } from "@/data/resources";
 import { ArticlePage } from "@/components/ArticlePage";
+import { JsonLd } from "@/components/JsonLd";
+import { pageMetadata, articleLd } from "@/lib/seo";
 
 export function generateStaticParams() {
   return RESOURCES.map((a) => ({ slug: a.slug }));
@@ -15,7 +17,11 @@ export async function generateMetadata({
   const { slug } = await params;
   const article = getArticle(slug);
   if (!article) return {};
-  return { title: article.title, description: article.description };
+  return pageMetadata({
+    title: article.seoTitle,
+    description: article.description,
+    path: `/resources/${slug}`,
+  });
 }
 
 export default async function Page({
@@ -26,5 +32,10 @@ export default async function Page({
   const { slug } = await params;
   const article = getArticle(slug);
   if (!article) notFound();
-  return <ArticlePage article={article} />;
+  return (
+    <>
+      <JsonLd data={articleLd({ title: article.title, description: article.description, path: `/resources/${slug}` })} />
+      <ArticlePage article={article} />
+    </>
+  );
 }

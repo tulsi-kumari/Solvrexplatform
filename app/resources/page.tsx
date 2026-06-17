@@ -1,10 +1,12 @@
 import { ResourcesIndex } from "@/components/ResourcesIndex";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "Career Resources",
+export const metadata = pageMetadata({
+  title: "Career Resources | Resume, LinkedIn, Referrals & Interview Guides",
   description:
-    "Practical career guides from Solvrex — resume tailoring, LinkedIn optimization, referral outreach, job search planning, and interview preparation.",
-};
+    "Free Solvrex career guides on resume tailoring, LinkedIn optimization, referral outreach, job search planning, and interview preparation — practical, no fluff.",
+  path: "/resources",
+});
 
 export default function Page() {
   return <ResourcesIndex />;

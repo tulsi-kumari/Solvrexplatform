@@ -2,6 +2,8 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { SERVICES, getService } from "@/data/services";
 import { ServiceDetailPage } from "@/components/ServiceDetailPage";
+import { JsonLd } from "@/components/JsonLd";
+import { pageMetadata, serviceLd } from "@/lib/seo";
 
 export function generateStaticParams() {
   return SERVICES.map((s) => ({ slug: s.slug }));
@@ -15,7 +17,11 @@ export async function generateMetadata({
   const { slug } = await params;
   const service = getService(slug);
   if (!service) return {};
-  return { title: { absolute: service.seoTitle }, description: service.overview };
+  return pageMetadata({
+    title: service.seoTitle,
+    description: service.metaDescription,
+    path: `/services/${slug}`,
+  });
 }
 
 export default async function Page({
@@ -26,5 +32,10 @@ export default async function Page({
   const { slug } = await params;
   const service = getService(slug);
   if (!service) notFound();
-  return <ServiceDetailPage service={service} />;
+  return (
+    <>
+      <JsonLd data={serviceLd({ name: service.title, description: service.metaDescription, path: `/services/${slug}` })} />
+      <ServiceDetailPage service={service} />
+    </>
+  );
 }

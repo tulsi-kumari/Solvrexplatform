@@ -11,33 +11,29 @@ const inter = Inter({
   display: "swap",
 });
 
-const fullTitle = `${siteConfig.name} | Career Services, Technology Consulting & Business Enablement`;
+const HOME_TITLE = "Solvrex | Career Services, Technology Consulting & Business Support";
+const HOME_DESCRIPTION =
+  "Human-led career services from Solvrex — resume reviews, LinkedIn optimization, job search support, and interview prep — plus technology consulting and enablement.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
-  title: { default: fullTitle, template: `%s | ${siteConfig.name}` },
-  description: siteConfig.description,
+  title: { default: HOME_TITLE, template: `%s | ${siteConfig.name}` },
+  description: HOME_DESCRIPTION,
+  applicationName: siteConfig.name,
   alternates: { canonical: "/" },
+  manifest: "/site.webmanifest",
   openGraph: {
     type: "website",
+    siteName: siteConfig.name,
     url: `${siteConfig.url}/`,
-    title: fullTitle,
-    description: siteConfig.description,
-    images: ["/og-image.png"],
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
+    locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: fullTitle,
-    description: siteConfig.description,
-    images: ["/og-image.png"],
-  },
-  icons: {
-    icon: [
-      { url: "/favicon.ico" },
-      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
-      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
-    ],
-    apple: "/apple-touch-icon.png",
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
   },
 };
 

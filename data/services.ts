@@ -7,6 +7,7 @@ export interface Service {
   number: string; // tile index on the overview page, e.g. "01"
   title: string;
   seoTitle: string; // full <title> for the detail page (absolute)
+  metaDescription: string; // 140–160 char meta description
   // Short description shown in the Navbar mega-menu.
   navDescription: string;
   // One-line description shown on the /services overview cards.
@@ -26,6 +27,8 @@ export const SERVICES: Service[] = [
     number: "01",
     title: "Business Enablement",
     seoTitle: "Website Development & Business Enablement | Solvrex",
+    metaDescription:
+      "Solvrex helps small businesses build websites, set up their online presence, and improve operations — practical digital enablement and operational support.",
     navDescription: "Website development and operational support",
     cardDescription:
       "Website development, online presence, and operational support for small businesses.",
@@ -57,6 +60,8 @@ export const SERVICES: Service[] = [
     number: "02",
     title: "Technology Consulting",
     seoTitle: "Technology Consulting & Architecture Guidance | Solvrex",
+    metaDescription:
+      "Independent technology consulting from Solvrex — platform evaluation, architecture guidance, and implementation planning, with no vendor affiliations.",
     navDescription: "Independent technology guidance",
     cardDescription:
       "Platform evaluation, architecture guidance, and implementation planning.",
@@ -87,7 +92,9 @@ export const SERVICES: Service[] = [
     slug: "career-services",
     number: "03",
     title: "Career Services",
-    seoTitle: "Career Services | Resume Reviews & Job Search Support | Solvrex",
+    seoTitle: "Career Services | Resume Review, LinkedIn Optimization & Job Search Support",
+    metaDescription:
+      "Human-led career services from Solvrex: resume review, LinkedIn optimization, job search strategy, application support, and interview preparation.",
     navDescription: "Support for career transitions",
     cardDescription:
       "Resume review, LinkedIn optimization, and job search strategy.",
