@@ -30,16 +30,16 @@ interface VariantConfig {
 const VARIANTS: Record<AuroraVariant, VariantConfig> = {
   // Largest treatment, upper-right, partially off-screen.
   homepage: {
-    opacity: 0.5,
+    opacity: 0.85,
     blobs: [
-      { cx: 880, cy: 70, rx: 430, ry: 360, grad: "blue", cls: "aurora-a" },
-      { cx: 990, cy: 300, rx: 360, ry: 320, grad: "indigo", cls: "aurora-b" },
-      { cx: 720, cy: 30, rx: 240, ry: 220, grad: "sky", cls: "aurora-c", opacity: 0.6 },
+      { cx: 800, cy: 130, rx: 480, ry: 400, grad: "blue", cls: "aurora-a" },
+      { cx: 960, cy: 330, rx: 400, ry: 350, grad: "indigo", cls: "aurora-b" },
+      { cx: 660, cy: 80, rx: 280, ry: 260, grad: "sky", cls: "aurora-c", opacity: 0.7 },
     ],
   },
   // Flowing diagonal — suggests guided progression top-left → bottom-right.
   career: {
-    opacity: 0.42,
+    opacity: 0.68,
     blobs: [
       { cx: 140, cy: 60, rx: 280, ry: 240, grad: "blue", cls: "aurora-a" },
       { cx: 520, cy: 300, rx: 300, ry: 260, grad: "blue", cls: "aurora-b" },
@@ -48,7 +48,7 @@ const VARIANTS: Record<AuroraVariant, VariantConfig> = {
   },
   // Structured + indigo for systems/architecture.
   technology: {
-    opacity: 0.4,
+    opacity: 0.66,
     geometric: true,
     blobs: [
       { cx: 860, cy: 110, rx: 380, ry: 320, grad: "indigo", cls: "aurora-a" },
@@ -57,7 +57,7 @@ const VARIANTS: Record<AuroraVariant, VariantConfig> = {
   },
   // Broad, expansive, teal-blue balance.
   business: {
-    opacity: 0.42,
+    opacity: 0.7,
     blobs: [
       { cx: 300, cy: 200, rx: 470, ry: 320, grad: "blue", cls: "aurora-b" },
       { cx: 840, cy: 380, rx: 470, ry: 320, grad: "sky", cls: "aurora-a" },
@@ -65,12 +65,12 @@ const VARIANTS: Record<AuroraVariant, VariantConfig> = {
   },
   // Content-first: smaller, lower opacity.
   resources: {
-    opacity: 0.22,
+    opacity: 0.45,
     blobs: [{ cx: 900, cy: 70, rx: 300, ry: 250, grad: "blue", cls: "aurora-a" }],
   },
   // Almost invisible — clarity first.
   pricing: {
-    opacity: 0.12,
+    opacity: 0.3,
     blobs: [{ cx: 950, cy: 50, rx: 240, ry: 200, grad: "blue", cls: "aurora-a" }],
   },
 };
@@ -90,8 +90,8 @@ export function Aurora({ variant = "homepage" }: { variant?: AuroraVariant }) {
         <defs>
           {GRADIENTS.map((g) => (
             <radialGradient key={g.id} id={`aurora-${variant}-${g.id}`} cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor={g.color} stopOpacity="0.5" />
-              <stop offset="70%" stopColor={g.color} stopOpacity="0" />
+              <stop offset="0%" stopColor={g.color} stopOpacity="0.75" />
+              <stop offset="68%" stopColor={g.color} stopOpacity="0" />
             </radialGradient>
           ))}
         </defs>
