@@ -63,7 +63,7 @@ const MENUS: MegaMenu[] = [
     columns: RESOURCES.map((a) => ({
       title: a.title,
       href: `/resources/${a.slug}`,
-      description: a.description,
+      description: a.summary,
     })),
     footerCta: { label: "Browse all resources", href: "/resources" },
   },
@@ -85,6 +85,34 @@ const SIMPLE_LINKS = [
   { label: "Contact", href: "/contact" },
 ];
 
+// Items in the slide-out drawer (tablet + mobile).
+const DRAWER_LINKS = [
+  { label: "Services", href: "/services" },
+  { label: "Pricing", href: "/pricing" },
+  { label: "Resources", href: "/resources" },
+  { label: "Careers", href: "/careers" },
+  { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
+];
+
+function BookButton({ compact = false }: { compact?: boolean }) {
+  return (
+    <Link
+      href="/book"
+      style={{
+        display: "inline-flex", alignItems: "center", height: "34px",
+        padding: compact ? "0 14px" : "0 16px", borderRadius: "4px",
+        background: C.blue, color: "#fff", fontSize: compact ? "13px" : "13.5px",
+        fontWeight: 500, lineHeight: 1, whiteSpace: "nowrap", transition: "background-color 0.15s",
+      }}
+      onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = C.blueHover; }}
+      onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = C.blue; }}
+    >
+      Book Consultation
+    </Link>
+  );
+}
+
 export function Navbar() {
   const pathname = usePathname();
   const [openMenu, setOpenMenu] = useState<string | null>(null);
@@ -97,6 +125,18 @@ export function Navbar() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // Lock body scroll while the drawer is open.
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [mobileOpen]);
+
+  // Close everything on navigation.
+  useEffect(() => {
+    setMobileOpen(false);
+    setOpenMenu(null);
+  }, [pathname]);
 
   const activeMenu = MENUS.find((m) => m.key === openMenu);
 
@@ -134,8 +174,8 @@ export function Navbar() {
           </span>
         </Link>
 
-        {/* Desktop nav */}
-        <nav style={{ display: "flex", alignItems: "center", gap: "2px" }} className="hidden md:flex">
+        {/* Desktop nav (>= 1024px) */}
+        <nav style={{ display: "flex", alignItems: "center", gap: "2px" }} className="hidden lg:flex">
           {MENUS.map((menu) => {
             const isOpen = openMenu === menu.key;
             const isActive = pathname.startsWith(menu.basePath);
@@ -177,38 +217,31 @@ export function Navbar() {
             </Link>
           ))}
 
-          <Link
-            href="/book"
-            style={{
-              marginLeft: "12px", display: "inline-flex", alignItems: "center",
-              height: "34px", padding: "0 16px", borderRadius: "4px",
-              background: C.blue, color: "#fff", fontSize: "13.5px", fontWeight: 500,
-              lineHeight: 1, whiteSpace: "nowrap", transition: "background-color 0.15s",
-            }}
-            onMouseEnter={(e) => { setOpenMenu(null); e.currentTarget.style.backgroundColor = C.blueHover; }}
-            onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = C.blue; }}
-          >
-            Book Consultation
-          </Link>
+          <span style={{ marginLeft: "8px" }}>
+            <BookButton />
+          </span>
         </nav>
 
-        {/* Mobile hamburger */}
-        <button
-          className="md:hidden"
-          onClick={() => { setMobileOpen(!mobileOpen); setOpenMenu(null); }}
-          style={{ background: "none", border: "none", padding: "8px", display: "flex", flexDirection: "column", gap: "5px", cursor: "pointer" }}
-          aria-label="Toggle navigation"
-        >
-          <span style={{ display: "block", width: "20px", height: "1.5px", backgroundColor: C.textMuted, borderRadius: "1px", transition: "transform 0.2s", transform: mobileOpen ? "translateY(6.5px) rotate(45deg)" : "none" }} />
-          <span style={{ display: "block", width: "20px", height: "1.5px", backgroundColor: C.textMuted, borderRadius: "1px", transition: "opacity 0.2s", opacity: mobileOpen ? 0 : 1 }} />
-          <span style={{ display: "block", width: "20px", height: "1.5px", backgroundColor: C.textMuted, borderRadius: "1px", transition: "transform 0.2s", transform: mobileOpen ? "translateY(-6.5px) rotate(-45deg)" : "none" }} />
-        </button>
+        {/* Tablet + mobile cluster (< 1024px): Book + hamburger */}
+        <div className="flex lg:hidden" style={{ alignItems: "center", gap: "10px" }}>
+          <BookButton compact />
+          <button
+            onClick={() => setMobileOpen(true)}
+            aria-label="Open navigation"
+            aria-expanded={mobileOpen}
+            style={{ background: "none", border: "none", padding: "8px", display: "flex", flexDirection: "column", gap: "5px", cursor: "pointer" }}
+          >
+            <span style={{ display: "block", width: "20px", height: "1.5px", backgroundColor: C.textMuted, borderRadius: "1px" }} />
+            <span style={{ display: "block", width: "20px", height: "1.5px", backgroundColor: C.textMuted, borderRadius: "1px" }} />
+            <span style={{ display: "block", width: "20px", height: "1.5px", backgroundColor: C.textMuted, borderRadius: "1px" }} />
+          </button>
+        </div>
       </div>
 
-      {/* ── Mega menu panel ── */}
+      {/* ── Mega menu panel (desktop) ── */}
       {activeMenu && (
         <div
-          className="hidden md:block"
+          className="hidden lg:block"
           style={{
             position: "absolute", top: "64px", left: 0, right: 0,
             backgroundColor: C.bgSurface, borderTop: `2px solid ${C.blue}`,
@@ -262,36 +295,51 @@ export function Navbar() {
         </div>
       )}
 
-      {/* ── Mobile menu ── */}
-      {mobileOpen && (
-        <div className="md:hidden" style={{ backgroundColor: C.bgSurface, borderTop: `1px solid ${C.border}` }}>
-          <div style={{ padding: "8px 0 20px" }}>
-            {[...MENUS.map((m) => ({ label: m.label, href: m.basePath })), ...SIMPLE_LINKS].map((link, i, arr) => (
+      {/* ── Slide-out drawer (tablet + mobile) ── */}
+      <div className="lg:hidden">
+        <div
+          className={`sx-drawer-overlay${mobileOpen ? " open" : ""}`}
+          onClick={() => setMobileOpen(false)}
+          aria-hidden="true"
+        />
+        <aside className={`sx-drawer${mobileOpen ? " open" : ""}`} role="dialog" aria-modal="true" aria-label="Navigation">
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: "64px", padding: "0 20px", borderBottom: `1px solid ${C.border}` }}>
+            <span style={{ fontSize: "13px", fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", color: C.textSubtle }}>Menu</span>
+            <button
+              onClick={() => setMobileOpen(false)}
+              aria-label="Close navigation"
+              style={{ background: "none", border: "none", color: C.textMuted, cursor: "pointer", padding: "6px", display: "inline-flex" }}
+            >
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></svg>
+            </button>
+          </div>
+          <nav style={{ padding: "8px 0", flex: 1 }}>
+            {DRAWER_LINKS.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileOpen(false)}
                 style={{
-                  display: "block", padding: "14px 24px", fontSize: "15px",
+                  display: "block", padding: "15px 20px", fontSize: "16px",
                   color: pathname.startsWith(link.href) ? C.text : C.textMuted,
-                  borderBottom: i < arr.length - 1 ? `1px solid ${C.border}` : "none",
+                  borderBottom: `1px solid ${C.border}`,
                 }}
               >
                 {link.label}
               </Link>
             ))}
-            <div style={{ padding: "16px 24px 0" }}>
-              <Link
-                href="/book"
-                onClick={() => setMobileOpen(false)}
-                style={{ display: "inline-flex", alignItems: "center", padding: "10px 18px", borderRadius: "3px", background: C.blue, color: "#fff", fontSize: "14px", fontWeight: 500 }}
-              >
-                Book Consultation
-              </Link>
-            </div>
+          </nav>
+          <div style={{ padding: "20px" }}>
+            <Link
+              href="/book"
+              onClick={() => setMobileOpen(false)}
+              style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "44px", borderRadius: "4px", background: C.blue, color: "#fff", fontSize: "14px", fontWeight: 500 }}
+            >
+              Book Consultation
+            </Link>
           </div>
-        </div>
-      )}
+        </aside>
+      </div>
     </header>
   );
 }
