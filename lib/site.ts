@@ -7,7 +7,7 @@ export const siteConfig = {
   // Used for metadata (canonical, Open Graph). No trailing slash.
   url: "https://solvrex.in",
   description:
-    "Solvrex helps professionals and businesses achieve measurable outcomes through technology consulting, career support, operational guidance, and practical business solutions.",
+    "Practical career services, technology consulting, and business enablement. Resume reviews, LinkedIn optimization, job search strategy, website development, and operational support.",
   // Public-facing contact inbox (the contact form's API route can override via env).
   contactEmail: "solvrex.official@gmail.com",
   linkedInUrl: "https://www.linkedin.com/company/solvrex-private-limited/",

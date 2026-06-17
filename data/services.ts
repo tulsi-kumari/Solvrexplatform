@@ -6,6 +6,7 @@ export interface Service {
   slug: string;
   number: string; // tile index on the overview page, e.g. "01"
   title: string;
+  seoTitle: string; // full <title> for the detail page (absolute)
   // Short description shown in the Navbar mega-menu.
   navDescription: string;
   // One-line description shown on the /services overview cards.
@@ -24,6 +25,7 @@ export const SERVICES: Service[] = [
     slug: "business-enablement",
     number: "01",
     title: "Business Enablement",
+    seoTitle: "Website Development & Business Enablement | Solvrex",
     navDescription: "Website development and operational support",
     cardDescription:
       "Website development, online presence, and operational support for small businesses.",
@@ -54,6 +56,7 @@ export const SERVICES: Service[] = [
     slug: "technology-consulting",
     number: "02",
     title: "Technology Consulting",
+    seoTitle: "Technology Consulting & Architecture Guidance | Solvrex",
     navDescription: "Independent technology guidance",
     cardDescription:
       "Platform evaluation, architecture guidance, and implementation planning.",
@@ -84,6 +87,7 @@ export const SERVICES: Service[] = [
     slug: "career-services",
     number: "03",
     title: "Career Services",
+    seoTitle: "Career Services | Resume Reviews & Job Search Support | Solvrex",
     navDescription: "Support for career transitions",
     cardDescription:
       "Resume review, LinkedIn optimization, and job search strategy.",

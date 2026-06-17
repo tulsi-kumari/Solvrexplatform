@@ -42,3 +42,6 @@ pnpm-error.log
 
 # figma export (inspection only)
 _figma_design.zip
+
+# internal working plan (not committed)
+CLAUDE.md
