@@ -96,24 +96,6 @@ const DRAWER_LINKS = [
   { label: "Contact", href: "/contact" },
 ];
 
-function BookButton({ compact = false }: { compact?: boolean }) {
-  return (
-    <Link
-      href="/book"
-      style={{
-        display: "inline-flex", alignItems: "center", height: "34px",
-        padding: compact ? "0 14px" : "0 16px", borderRadius: "4px",
-        background: C.blue, color: "#fff", fontSize: compact ? "13px" : "13.5px",
-        fontWeight: 500, lineHeight: 1, whiteSpace: "nowrap", transition: "background-color 0.15s",
-      }}
-      onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = C.blueHover; }}
-      onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = C.blue; }}
-    >
-      Book Consultation
-    </Link>
-  );
-}
-
 export function Navbar() {
   const pathname = usePathname();
   const [openMenu, setOpenMenu] = useState<string | null>(null);
@@ -182,25 +164,26 @@ export function Navbar() {
             const isOpen = openMenu === menu.key;
             const isActive = pathname.startsWith(menu.basePath);
             return (
-              <button
+              <Link
                 key={menu.key}
+                href={menu.basePath}
                 style={{
                   display: "inline-flex", alignItems: "center", gap: "5px",
                   padding: "6px 12px",
                   background: isOpen ? "rgba(77,124,255,0.1)" : "transparent",
-                  border: "none", borderRadius: "3px",
+                  borderRadius: "3px",
                   fontSize: "14px", fontWeight: 400,
                   color: isOpen || isActive ? C.text : C.textMuted,
-                  cursor: "pointer", transition: "color 0.15s, background 0.15s",
+                  transition: "color 0.15s, background 0.15s",
                 }}
                 onMouseEnter={() => setOpenMenu(menu.key)}
-                onClick={() => setOpenMenu((cur) => (cur === menu.key ? null : menu.key))}
+                onClick={() => setOpenMenu(null)}
               >
                 {menu.label}
                 <svg width="11" height="11" viewBox="0 0 12 12" fill="none" style={{ transform: isOpen ? "rotate(180deg)" : "none", transition: "transform 0.2s" }}>
                   <path d="M2 4.5L6 8L10 4.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
-              </button>
+              </Link>
             );
           })}
 
@@ -222,15 +205,11 @@ export function Navbar() {
           <span style={{ marginLeft: "6px", display: "inline-flex", alignItems: "center" }}>
             <ThemeToggle />
           </span>
-          <span style={{ marginLeft: "4px" }}>
-            <BookButton />
-          </span>
         </nav>
 
         {/* Tablet + mobile cluster (< 1024px): Book + hamburger */}
         <div className="sx-mobile-nav">
           <ThemeToggle />
-          <BookButton compact />
           <button
             onClick={() => setMobileOpen(true)}
             aria-label="Open navigation"

@@ -14,7 +14,7 @@ import {
 import { Aurora } from "@/components/ui/Aurora";
 
 const styles = `
-  .sx-tier-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: start; }
+  .sx-tier-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: stretch; }
   .sx-faq-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px 48px; }
   .sx-cmp { width: 100%; border-collapse: collapse; min-width: 560px; }
   .sx-cmp th, .sx-cmp td { text-align: left; padding: 14px 16px; border-bottom: 1px solid ${C.border}; font-size: 14px; }
