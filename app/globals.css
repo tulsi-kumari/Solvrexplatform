@@ -35,32 +35,35 @@
 .sx-bg::after {
   content: "";
   position: absolute;
-  width: 80vmax;
-  height: 80vmax;
+  width: 75vw;
+  height: 75vw;
   border-radius: 50%;
-  filter: blur(60px);
+  filter: blur(40px);
   will-change: transform;
   backface-visibility: hidden;
 }
 .sx-bg::before {
-  top: -22vmax;
-  left: -12vmax;
-  background: radial-gradient(circle at center, rgba(37, 99, 235, 0.1), transparent 60%);
-  animation: sx-bg-drift-a 52s ease-in-out infinite;
+  top: -18vw;
+  left: 50%;
+  margin-left: -37vw;
+  background: radial-gradient(circle at center, rgba(37, 99, 235, 0.22), transparent 64%);
+  animation: sx-bg-drift-a 42s ease-in-out infinite;
 }
 .sx-bg::after {
-  bottom: -26vmax;
-  right: -12vmax;
-  background: radial-gradient(circle at center, rgba(67, 56, 202, 0.1), transparent 60%);
-  animation: sx-bg-drift-b 60s ease-in-out infinite;
+  bottom: -22vw;
+  right: -12vw;
+  background: radial-gradient(circle at center, rgba(67, 56, 202, 0.2), transparent 64%);
+  animation: sx-bg-drift-b 54s ease-in-out infinite;
 }
 @keyframes sx-bg-drift-a {
-  0%, 100% { transform: translate3d(0, 0, 0); }
-  50% { transform: translate3d(6vmax, 4vmax, 0); }
+  0% { transform: translate3d(-7vw, -3vw, 0) scale(1); }
+  50% { transform: translate3d(7vw, 5vw, 0) scale(1.12); }
+  100% { transform: translate3d(-7vw, -3vw, 0) scale(1); }
 }
 @keyframes sx-bg-drift-b {
-  0%, 100% { transform: translate3d(0, 0, 0); }
-  50% { transform: translate3d(-6vmax, -4vmax, 0); }
+  0% { transform: translate3d(6vw, 4vw, 0) scale(1.06); }
+  50% { transform: translate3d(-7vw, -5vw, 0) scale(1); }
+  100% { transform: translate3d(6vw, 4vw, 0) scale(1.06); }
 }
 
 /* Timeline line-draw */
