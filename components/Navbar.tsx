@@ -118,17 +118,20 @@ export function Navbar() {
         <Link
           href="/"
           aria-label={siteConfig.name}
-          style={{ display: "inline-flex", alignItems: "center" }}
+          style={{ display: "inline-flex", alignItems: "center", gap: "9px" }}
           onClick={() => { setOpenMenu(null); setMobileOpen(false); }}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/image.png"
-            alt={siteConfig.name}
-            width={36}
-            height={36}
-            style={{ height: "34px", width: "auto", display: "block", filter: "invert(1)", mixBlendMode: "screen" }}
+            src="/mark.png"
+            alt=""
+            width={29}
+            height={24}
+            style={{ height: "24px", width: "auto", display: "block", filter: "invert(1)", mixBlendMode: "screen" }}
           />
+          <span style={{ fontSize: "15px", fontWeight: 600, color: C.text, letterSpacing: "-0.01em" }}>
+            {siteConfig.name}
+          </span>
         </Link>
 
         {/* Desktop nav */}

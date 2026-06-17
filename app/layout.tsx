@@ -23,9 +23,9 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
   manifest: "/site.webmanifest",
   icons: {
-    icon: "/image.png",
-    shortcut: "/image.png",
-    apple: "/image.png",
+    icon: "/mark.png",
+    shortcut: "/mark.png",
+    apple: "/mark.png",
   },
   openGraph: {
     type: "website",
