@@ -5,6 +5,13 @@ import { BulletList } from "@/components/ui/BulletList";
 import { ContactCallout } from "@/components/ui/ContactCallout";
 import type { Service } from "@/data/services";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { Aurora, type AuroraVariant } from "@/components/ui/Aurora";
+
+const AURORA_BY_SLUG: Record<string, AuroraVariant> = {
+  "business-enablement": "business",
+  "technology-consulting": "technology",
+  "career-services": "career",
+};
 
 const labelStyle: CSSProperties = {
   ...metaLabel,
@@ -26,8 +33,9 @@ export function ServiceDetailPage({ service }: { service: Service }) {
   return (
     <div style={{ backgroundColor: "transparent" }}>
       {/* Page header */}
-      <section style={{ padding: "80px 0 64px", borderBottom: `1px solid ${C.border}` }}>
-        <div className="sx-container">
+      <section style={{ padding: "80px 0 64px", borderBottom: `1px solid ${C.border}`, position: "relative", overflow: "hidden" }}>
+        <Aurora variant={AURORA_BY_SLUG[service.slug] ?? "homepage"} />
+        <div className="sx-container" style={{ position: "relative", zIndex: 1 }}>
           <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Services", href: "/services" }, { label: service.title }]} />
           <p style={eyebrow}>{service.title}</p>
           <h1 style={{ ...pageH1, maxWidth: "560px" }}>{service.h1}</h1>

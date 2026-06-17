@@ -2,6 +2,7 @@ import Link from "next/link";
 import { C, eyebrow, pageH1 } from "@/lib/theme";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { RESOURCES } from "@/data/resources";
+import { Aurora } from "@/components/ui/Aurora";
 
 const styles = `
   .sx-res-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; grid-auto-rows: 1fr; }
@@ -16,8 +17,9 @@ export function ResourcesIndex() {
     <div style={{ backgroundColor: "transparent" }}>
       <style>{styles}</style>
 
-      <section style={{ padding: "80px 0 56px", borderBottom: `1px solid ${C.border}` }}>
-        <div className="sx-container">
+      <section style={{ padding: "80px 0 56px", borderBottom: `1px solid ${C.border}`, position: "relative", overflow: "hidden" }}>
+        <Aurora variant="resources" />
+        <div className="sx-container" style={{ position: "relative", zIndex: 1 }}>
           <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Resources" }]} />
           <p style={eyebrow}>Resources</p>
           <h1 style={{ ...pageH1, maxWidth: "560px", marginBottom: "18px" }}>Career resources.</h1>

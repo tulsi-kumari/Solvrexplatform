@@ -5,6 +5,7 @@ import { LEVELS, getRolesByLevel } from "@/data/roles";
 import { C, eyebrow, sectionHeading } from "@/lib/theme";
 import { siteConfig } from "@/lib/site";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { Aurora } from "@/components/ui/Aurora";
 
 /* ── Page-scoped CSS ─────────────────────────────────────────── */
 const styles = `
@@ -25,6 +26,7 @@ export function CareersPage() {
 
       {/* Hero */}
       <section style={{ padding: "120px 0 100px", position: "relative", overflow: "hidden", borderBottom: `1px solid ${C.border}` }}>
+        <Aurora variant="business" />
         <div
           style={{
             position: "absolute", inset: 0,
@@ -34,7 +36,7 @@ export function CareersPage() {
           aria-hidden="true"
         />
         <div style={{ position: "absolute", left: 0, top: 0, width: "3px", height: "100%", background: `linear-gradient(to bottom, ${C.blue} 0%, transparent 100%)` }} aria-hidden="true" />
-        <div className="sx-container" style={{ position: "relative" }}>
+        <div className="sx-container" style={{ position: "relative", zIndex: 1 }}>
           <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Careers" }]} />
           <p style={eyebrow}>Careers at Solvrex</p>
           <h1 style={{ fontSize: "clamp(38px, 5.5vw, 64px)", fontWeight: 300, color: C.text, lineHeight: 1.1, letterSpacing: "-0.03em", marginBottom: "26px", maxWidth: "760px" }}>

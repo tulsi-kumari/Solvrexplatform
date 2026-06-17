@@ -11,6 +11,7 @@ import {
   BUSINESS_PRICING,
   PRICING_FAQ,
 } from "@/lib/pricing";
+import { Aurora } from "@/components/ui/Aurora";
 
 const styles = `
   .sx-tier-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: start; }
@@ -37,8 +38,9 @@ export function PricingPage() {
       <style>{styles}</style>
 
       {/* Header */}
-      <section style={{ padding: "80px 0 56px", borderBottom: `1px solid ${C.border}` }}>
-        <div className="sx-container">
+      <section style={{ padding: "80px 0 56px", borderBottom: `1px solid ${C.border}`, position: "relative", overflow: "hidden" }}>
+        <Aurora variant="pricing" />
+        <div className="sx-container" style={{ position: "relative", zIndex: 1 }}>
           <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Pricing" }]} />
           <p style={eyebrow}>Pricing</p>
           <h1 style={{ ...pageH1, maxWidth: "560px", marginBottom: "18px" }}>Simple, transparent plans.</h1>

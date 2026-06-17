@@ -5,6 +5,7 @@ import { C, eyebrow, sectionHeading } from "@/lib/theme";
 import { PrimaryLink, ArrowRight } from "@/components/ui/PrimaryLink";
 import { Reveal } from "@/components/ui/Reveal";
 import { CareerJourney } from "@/components/CareerJourney";
+import { Aurora } from "@/components/ui/Aurora";
 import { CAREER_SERVICES } from "@/data/careerServices";
 import { PRICING_TIERS, PRICING_IS_PLACEHOLDER } from "@/lib/pricing";
 import { RESOURCES } from "@/data/resources";
@@ -61,19 +62,9 @@ export function Home() {
 
       {/* ── 1. Hero ── */}
       <section style={{ padding: "104px 0 64px", position: "relative", overflow: "hidden", borderBottom: `1px solid ${C.border}` }}>
-        {/* subtle drifting gradient */}
-        <div
-          className="sx-gradient-drift"
-          aria-hidden="true"
-          style={{
-            position: "absolute", top: "-30%", left: "50%", width: "900px", height: "700px",
-            transform: "translateX(-50%)",
-            background: "radial-gradient(closest-side, rgba(77,124,255,0.16), rgba(77,124,255,0) 70%)",
-            pointerEvents: "none", filter: "blur(8px)",
-          }}
-        />
+        <Aurora variant="homepage" />
         <div aria-hidden="true" style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(rgba(77,124,255,0.06) 1px, transparent 1px)", backgroundSize: "28px 28px", pointerEvents: "none" }} />
-        <div className="sx-container" style={{ position: "relative" }}>
+        <div className="sx-container" style={{ position: "relative", zIndex: 1 }}>
           <div style={{ maxWidth: "760px" }}>
           <p style={eyebrow}>Career Services</p>
           <h1 style={{ fontSize: "clamp(38px, 5.6vw, 66px)", fontWeight: 300, color: C.text, lineHeight: 1.08, letterSpacing: "-0.03em", marginBottom: "26px" }}>
