@@ -13,6 +13,7 @@ const styles = `
   .hx-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
   .hx-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: start; }
   .hx-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .hx-hero { display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 64px; align-items: center; }
   .hx-steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; position: relative; }
   .hx-cardlink:hover .hx-more { text-decoration: underline; }
   .hx-cardlink:focus-visible, .hx-btn:focus-visible { outline: 2px solid ${C.blueLight}; outline-offset: 2px; }
@@ -21,6 +22,7 @@ const styles = `
     .hx-grid-3 { grid-template-columns: 1fr; }
     .hx-steps { grid-template-columns: 1fr; gap: 22px; }
     .hx-stepline { display: none !important; }
+    .hx-hero { grid-template-columns: 1fr; gap: 48px; }
   }
   @media (max-width: 620px) {
     .hx-grid-4 { grid-template-columns: 1fr; }
@@ -73,7 +75,9 @@ export function Home() {
           }}
         />
         <div aria-hidden="true" style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(rgba(77,124,255,0.06) 1px, transparent 1px)", backgroundSize: "28px 28px", pointerEvents: "none" }} />
-        <div className="sx-container" style={{ position: "relative", maxWidth: "820px" }}>
+        <div className="sx-container" style={{ position: "relative" }}>
+          <div className="hx-hero">
+            <div style={{ maxWidth: "620px" }}>
           <p style={eyebrow}>Career Services</p>
           <h1 style={{ fontSize: "clamp(38px, 5.6vw, 66px)", fontWeight: 300, color: C.text, lineHeight: 1.08, letterSpacing: "-0.03em", marginBottom: "26px" }}>
             Practical career guidance for professionals in transition.
@@ -94,11 +98,11 @@ export function Home() {
             </Link>
           </div>
           <p style={{ fontSize: "13px", color: C.textSubtle, letterSpacing: "0.02em" }}>Human-led. Technology-enabled.</p>
+            </div>
+            <div><CareerJourney /></div>
+          </div>
         </div>
       </section>
-
-      {/* ── Career journey diagram ── */}
-      <CareerJourney />
 
       {/* ── 2. Trust bar ── */}
       <section style={sectionPad}>
