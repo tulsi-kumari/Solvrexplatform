@@ -8,7 +8,7 @@ import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 
 export function ServicesPage() {
   return (
-    <div style={{ backgroundColor: C.bg }}>
+    <div style={{ backgroundColor: "transparent" }}>
 
       {/* Page header */}
       <section style={{ padding: '80px 0 64px', borderBottom: `1px solid ${C.border}` }}>

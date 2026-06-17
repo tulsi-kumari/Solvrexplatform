@@ -8,7 +8,7 @@ export function ArticlePage({ article }: { article: Article }) {
   const hasBody = !!article.body && article.body.length > 0;
 
   return (
-    <div style={{ backgroundColor: C.bg }}>
+    <div style={{ backgroundColor: "transparent" }}>
       {/* Header */}
       <section style={{ padding: "80px 0 56px", borderBottom: `1px solid ${C.border}` }}>
         <div className="sx-container">

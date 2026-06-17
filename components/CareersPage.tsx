@@ -20,7 +20,7 @@ const styles = `
 
 export function CareersPage() {
   return (
-    <div style={{ backgroundColor: C.bg }}>
+    <div style={{ backgroundColor: "transparent" }}>
       <style>{styles}</style>
 
       {/* Hero */}

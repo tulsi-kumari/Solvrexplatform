@@ -15,7 +15,7 @@ export function CategoryPage({ level }: { level: LevelInfo }) {
   const roles = getRolesByLevel(level.id);
 
   return (
-    <div style={{ backgroundColor: C.bg }}>
+    <div style={{ backgroundColor: "transparent" }}>
       <style>{styles}</style>
 
       {/* Header */}

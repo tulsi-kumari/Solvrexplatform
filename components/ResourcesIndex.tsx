@@ -13,7 +13,7 @@ const styles = `
 
 export function ResourcesIndex() {
   return (
-    <div style={{ backgroundColor: C.bg }}>
+    <div style={{ backgroundColor: "transparent" }}>
       <style>{styles}</style>
 
       <section style={{ padding: "80px 0 56px", borderBottom: `1px solid ${C.border}` }}>

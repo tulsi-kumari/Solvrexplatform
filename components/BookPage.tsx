@@ -10,7 +10,7 @@ const points = [
 
 export function BookPage() {
   return (
-    <div style={{ backgroundColor: C.bg }}>
+    <div style={{ backgroundColor: "transparent" }}>
       {/* Header */}
       <section style={{ padding: "80px 0 64px", borderBottom: `1px solid ${C.border}` }}>
         <div className="sx-container">

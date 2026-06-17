@@ -23,7 +23,7 @@ function Row({ label, children, last }: { label: React.ReactNode; children: Reac
 
 export function ServiceDetailPage({ service }: { service: Service }) {
   return (
-    <div style={{ backgroundColor: C.bg }}>
+    <div style={{ backgroundColor: "transparent" }}>
       {/* Page header */}
       <section style={{ padding: "80px 0 64px", borderBottom: `1px solid ${C.border}` }}>
         <div className="sx-container">

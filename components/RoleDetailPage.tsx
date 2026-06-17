@@ -18,7 +18,7 @@ function Fact({ label, value }: { label: string; value: string | number }) {
 
 export function RoleDetailPage({ role }: { role: Role }) {
   return (
-    <div style={{ backgroundColor: C.bg }}>
+    <div style={{ backgroundColor: "transparent" }}>
       {/* Header band */}
       <section style={{ backgroundColor: C.bgSurface, borderBottom: `1px solid ${C.border}` }}>
         <div className="sx-container" style={{ padding: "32px 0 40px" }}>

@@ -11,7 +11,7 @@ const styles = `
 
 export function PricingPage() {
   return (
-    <div style={{ backgroundColor: C.bg }}>
+    <div style={{ backgroundColor: "transparent" }}>
       <style>{styles}</style>
 
       {/* Header */}

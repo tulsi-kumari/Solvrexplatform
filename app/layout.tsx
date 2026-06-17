@@ -49,12 +49,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        <div className="sx-bg" aria-hidden="true" />
         <div
           style={{
+            position: "relative",
+            zIndex: 1,
             minHeight: "100vh",
             display: "flex",
             flexDirection: "column",
-            backgroundColor: "#0d0e14",
+            backgroundColor: "transparent",
           }}
         >
           <Navbar />

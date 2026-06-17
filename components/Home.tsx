@@ -55,7 +55,7 @@ const cardBody = { fontSize: "14px", color: C.textMuted, lineHeight: 1.6 } as co
 
 export function Home() {
   return (
-    <div style={{ backgroundColor: C.bg }}>
+    <div style={{ backgroundColor: "transparent" }}>
       <style>{styles}</style>
 
       {/* ── 1. Hero ── */}
