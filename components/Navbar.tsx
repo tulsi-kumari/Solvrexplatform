@@ -117,10 +117,18 @@ export function Navbar() {
       <div className="sx-container" style={{ height: "64px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         <Link
           href="/"
-          style={{ fontSize: "15px", fontWeight: 600, color: C.text, letterSpacing: "-0.01em" }}
+          aria-label={siteConfig.name}
+          style={{ display: "inline-flex", alignItems: "center" }}
           onClick={() => { setOpenMenu(null); setMobileOpen(false); }}
         >
-          {siteConfig.name}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/image.png"
+            alt={siteConfig.name}
+            width={36}
+            height={36}
+            style={{ height: "34px", width: "auto", display: "block", filter: "invert(1)", mixBlendMode: "screen" }}
+          />
         </Link>
 
         {/* Desktop nav */}
