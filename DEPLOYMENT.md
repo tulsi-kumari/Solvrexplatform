@@ -6,7 +6,7 @@ target and auto-detects Next.js.
 
 ## 1. Set up Resend (free)
 
-1. Sign up at [resend.com](https://resend.com) using **solvrex.official@gmail.com** as
+1. Sign up at [resend.com](https://resend.com) using **official@solvrex.in** as
    the account email. This lets the form send to that inbox immediately with the
    `onboarding@resend.dev` sender — no domain/DNS verification needed.
 2. Create an API key (Dashboard → API Keys).
@@ -36,7 +36,7 @@ npm install
 npm run dev                          # http://localhost:3000
 ```
 
-Submit the contact form and confirm an email arrives at `solvrex.official@gmail.com`
+Submit the contact form and confirm an email arrives at `official@solvrex.in`
 (reply-to is set to the sender's address). Without `RESEND_API_KEY` set, the form
 returns a friendly error instead of sending.
 

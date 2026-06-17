@@ -2,7 +2,7 @@
 
 Technology Consulting, Career Support & Business Solutions.
 
-A multi-page marketing site built from the Figma design, on **Next.js (App Router) + Tailwind CSS**, with a contact form that emails inquiries to **solvrex.official@gmail.com** via [Resend](https://resend.com). Deployed on **Vercel**.
+A multi-page marketing site built from the Figma design, on **Next.js (App Router) + Tailwind CSS**, with a contact form that emails inquiries to **official@solvrex.in** via [Resend](https://resend.com). Deployed on **Vercel**.
 
 ## Getting started
 
@@ -26,11 +26,11 @@ cp .env.local.example .env.local
 | Variable | Required | Default | Notes |
 | --- | --- | --- | --- |
 | `RESEND_API_KEY` | yes | — | From your Resend dashboard. |
-| `CONTACT_TO_EMAIL` | no | `solvrex.official@gmail.com` | Where inquiries are delivered. |
+| `CONTACT_TO_EMAIL` | no | `official@solvrex.in` | Where inquiries are delivered. |
 | `CONTACT_FROM_EMAIL` | no | `Solvrex <onboarding@resend.dev>` | Sender. `onboarding@resend.dev` works with no DNS setup. |
 
 **Free Resend setup (no DNS required):** create a free Resend account using
-`solvrex.official@gmail.com` as the account email. Unverified accounts can send to that
+`official@solvrex.in` as the account email. Unverified accounts can send to that
 same address immediately using the `onboarding@resend.dev` sender — which is
 exactly this form's use case. Later, verify the `solvrex.in` domain in Resend to
 send from a branded address like `hello@solvrex.in`.

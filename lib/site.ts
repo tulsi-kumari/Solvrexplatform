@@ -9,7 +9,7 @@ export const siteConfig = {
   description:
     "Practical career services, technology consulting, and business enablement. Resume reviews, LinkedIn optimization, job search strategy, website development, and operational support.",
   // Public-facing contact inbox (the contact form's API route can override via env).
-  contactEmail: "solvrex.official@gmail.com",
+  contactEmail: "official@solvrex.in",
   linkedInUrl: "https://www.linkedin.com/company/solvrex-private-limited/",
   // Shared Google Form the Careers "Apply" button opens.
   applyFormUrl:
