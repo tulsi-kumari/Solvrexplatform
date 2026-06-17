@@ -30,7 +30,7 @@ interface VariantConfig {
 const VARIANTS: Record<AuroraVariant, VariantConfig> = {
   // Largest treatment, upper-right, partially off-screen.
   homepage: {
-    opacity: 0.88,
+    opacity: 0.8,
     blobs: [
       { cx: 800, cy: 130, rx: 480, ry: 400, grad: "blue", cls: "aurora-a" },
       { cx: 960, cy: 330, rx: 400, ry: 350, grad: "indigo", cls: "aurora-b" },
