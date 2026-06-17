@@ -9,6 +9,7 @@ import { SERVICES } from "@/data/services";
 import { PRICING_TIERS } from "@/lib/pricing";
 import { RESOURCES } from "@/data/resources";
 import { LEVELS } from "@/data/roles";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 interface MegaItem {
   label: string;
@@ -163,11 +164,12 @@ export function Navbar() {
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
+            className="sx-logo"
             src="/mark.png"
             alt=""
             width={29}
             height={24}
-            style={{ height: "24px", width: "auto", display: "block", filter: "invert(1)", mixBlendMode: "screen" }}
+            style={{ height: "24px", width: "auto", display: "block" }}
           />
           <span style={{ fontSize: "15px", fontWeight: 600, color: C.text, letterSpacing: "-0.01em" }}>
             {siteConfig.name}
@@ -217,13 +219,17 @@ export function Navbar() {
             </Link>
           ))}
 
-          <span style={{ marginLeft: "8px" }}>
+          <span style={{ marginLeft: "6px", display: "inline-flex", alignItems: "center" }}>
+            <ThemeToggle />
+          </span>
+          <span style={{ marginLeft: "4px" }}>
             <BookButton />
           </span>
         </nav>
 
         {/* Tablet + mobile cluster (< 1024px): Book + hamburger */}
         <div className="sx-mobile-nav">
+          <ThemeToggle />
           <BookButton compact />
           <button
             onClick={() => setMobileOpen(true)}

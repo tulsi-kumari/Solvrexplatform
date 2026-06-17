@@ -4,24 +4,26 @@ import type { CSSProperties } from "react";
  * Single source of truth for design tokens.
  * Every component imports `C` from here instead of redefining a local palette.
  */
+// Values are CSS variables (defined per theme in app/globals.css), so every
+// inline style that reads from C automatically responds to the active theme.
 export const C = {
   // surfaces
-  bg: "#0d0e14",
-  bgSurface: "#13151e",
-  bgRaised: "#171a26",
-  bgFooter: "#0a0b11",
+  bg: "var(--sx-bg)",
+  bgSurface: "var(--sx-bg-surface)",
+  bgRaised: "var(--sx-bg-raised)",
+  bgFooter: "var(--sx-bg-footer)",
   // borders
-  border: "#1e2235",
-  borderStrong: "#2a2f4a",
-  // text (brightest → faintest)
-  text: "#f5f5f7",
-  textBody: "#c4c7d6",
-  textMuted: "#a0a3b8",
-  textSubtle: "#8a8da5",
+  border: "var(--sx-border)",
+  borderStrong: "var(--sx-border-strong)",
+  // text (strongest → faintest)
+  text: "var(--sx-text)",
+  textBody: "var(--sx-text-body)",
+  textMuted: "var(--sx-text-muted)",
+  textSubtle: "var(--sx-text-subtle)",
   // accent
-  blue: "#4d7cff",
-  blueHover: "#3b6aff",
-  blueLight: "#7a9dff",
+  blue: "var(--sx-blue)",
+  blueHover: "var(--sx-blue-hover)",
+  blueLight: "var(--sx-blue-light)",
 } as const;
 
 // Translucent accent helpers (used for badges, glows, hover fills).

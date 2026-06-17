@@ -92,8 +92,8 @@ export function ConsultationForm({
     return (
       <div style={{ paddingTop: "4px" }}>
         <div style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: "40px", height: "40px", borderRadius: "50%", backgroundColor: "rgba(77,124,255,0.12)", marginBottom: "20px" }}>
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <path d="M3 8l3.5 3.5 6.5-7" stroke={C.blue} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ color: C.blue }}>
+            <path d="M3 8l3.5 3.5 6.5-7" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </div>
         <h2 style={{ fontSize: "20px", fontWeight: 400, color: C.text, marginBottom: "12px", letterSpacing: "-0.01em" }}>Thank you.</h2>

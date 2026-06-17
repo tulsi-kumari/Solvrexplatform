@@ -26,8 +26,8 @@ const styles = `
 
 function Check() {
   return (
-    <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-label="Included" style={{ display: "inline-block", verticalAlign: "middle" }}>
-      <path d="M3 8l3.5 3.5 6.5-7" stroke={C.blue} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+    <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-label="Included" style={{ display: "inline-block", verticalAlign: "middle", color: C.blue }}>
+      <path d="M3 8l3.5 3.5 6.5-7" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }

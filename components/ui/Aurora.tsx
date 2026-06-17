@@ -2,6 +2,8 @@
 // only (GPU). Place inside a position:relative, overflow:hidden hero with content above
 // it (z-index > 0). Honors prefers-reduced-motion via the .aurora-* rules in globals.css.
 
+import type { CSSProperties } from "react";
+
 export type AuroraVariant =
   | "homepage"
   | "career"
@@ -85,7 +87,7 @@ const GRADIENTS: { id: Blob["grad"]; color: string }[] = [
 export function Aurora({ variant = "homepage" }: { variant?: AuroraVariant }) {
   const cfg = VARIANTS[variant];
   return (
-    <div className="aurora" aria-hidden="true" style={{ opacity: cfg.opacity }}>
+    <div className="aurora" aria-hidden="true" style={{ ["--aurora-o" as string]: cfg.opacity } as CSSProperties}>
       <svg viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid slice">
         <defs>
           {GRADIENTS.map((g) => (

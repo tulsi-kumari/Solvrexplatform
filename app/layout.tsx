@@ -48,8 +48,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{if(localStorage.getItem('solvrex-theme')==='dark'){document.documentElement.setAttribute('data-theme','dark')}}catch(e){}",
+          }}
+        />
         <div className="sx-bg" aria-hidden="true" />
         <div
           style={{
