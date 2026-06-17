@@ -4,6 +4,7 @@ import Link from "next/link";
 import { C, eyebrow, sectionHeading } from "@/lib/theme";
 import { PrimaryLink, ArrowRight } from "@/components/ui/PrimaryLink";
 import { Reveal } from "@/components/ui/Reveal";
+import { CareerJourney } from "@/components/CareerJourney";
 import { CAREER_SERVICES } from "@/data/careerServices";
 import { PRICING_TIERS, PRICING_IS_PLACEHOLDER } from "@/lib/pricing";
 import { RESOURCES } from "@/data/resources";
@@ -95,6 +96,9 @@ export function Home() {
           <p style={{ fontSize: "13px", color: C.textSubtle, letterSpacing: "0.02em" }}>Human-led. Technology-enabled.</p>
         </div>
       </section>
+
+      {/* ── Career journey diagram ── */}
+      <CareerJourney />
 
       {/* ── 2. Trust bar ── */}
       <section style={sectionPad}>
