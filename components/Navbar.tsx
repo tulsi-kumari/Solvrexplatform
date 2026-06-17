@@ -329,15 +329,6 @@ export function Navbar() {
               </Link>
             ))}
           </nav>
-          <div style={{ padding: "20px" }}>
-            <Link
-              href="/book"
-              onClick={() => setMobileOpen(false)}
-              style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "44px", borderRadius: "4px", background: C.blue, color: "#fff", fontSize: "14px", fontWeight: 500 }}
-            >
-              Book Consultation
-            </Link>
-          </div>
         </aside>
       </div>
     </header>
