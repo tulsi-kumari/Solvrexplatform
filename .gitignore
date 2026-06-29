@@ -45,3 +45,7 @@ _figma_design.zip
 
 # internal working plan (not committed)
 CLAUDE.md
+
+# monorepo build/deps
+.next/
+node_modules/

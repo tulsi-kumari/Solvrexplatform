@@ -1,0 +1,19 @@
+{
+  "name": "@solvrex/ui",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./server": "./src/server/index.ts",
+    "./styles/globals.css": "./src/styles/globals.css"
+  },
+  "dependencies": {
+    "resend": "4.1.2"
+  },
+  "peerDependencies": {
+    "next": "^15",
+    "react": "^18",
+    "react-dom": "^18"
+  }
+}
